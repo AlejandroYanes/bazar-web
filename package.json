@@ -13,9 +13,8 @@
     "test:e2e": "cypress open",
     "lint": "CI=true eslint --ext=jsx,ts,tsx 'src/**/*.{ts,tsx}'",
     "lint:fix": "CI=true eslint --ext=jsx,ts,tsx 'src/**/*.{ts,tsx}' --fix",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "analize": "source-map-explorer 'build/static/js/*.js'"
+    "analize": "source-map-explorer 'build/static/js/*.js'",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -98,7 +97,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "faker": "4.1.0",
     "gh-pages": "^3.1.0",
-    "husky": "^4.2.5",
+    "husky": "^7.0.0",
     "jest-junit": "^12.0.0",
     "node-sass": "^6.0.1",
     "source-map-explorer": "^2.5.2",
