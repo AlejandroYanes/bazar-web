@@ -1,0 +1,6 @@
+* text eol=lf
+*.ttf binary eol=lf
+*.svg binary eol=lf
+*.jpg binary eol=lf
+*.png binary eol=lf
+*.ico binary eol=lf

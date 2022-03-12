@@ -1,0 +1,110 @@
+{
+  "name": "bazar",
+  "version": "0.1.0",
+  "repository": "https://github.com/AlejandroYanes/bazar",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:all": "react-scripts test --watchAll=false",
+    "test:ci": "react-scripts test --watchAll=false --ci --coverage --reporters=default --reporters=jest-junit --coverageReporters=cobertura",
+    "eject": "react-scripts eject",
+    "test:e2e": "cypress open",
+    "lint": "CI=true eslint --ext=jsx,ts,tsx 'src/**/*.{ts,tsx}'",
+    "lint:fix": "CI=true eslint --ext=jsx,ts,tsx 'src/**/*.{ts,tsx}' --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "analize": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test:all"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "output": "./junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuiteName": "true"
+  },
+  "dependencies": {
+    "activate-components": "^0.0.13",
+    "appwrite": "^7.0.0",
+    "autosize": "^4.0.2",
+    "axios": "0.21.2",
+    "date-fns": "^2.16.1",
+    "framer-motion": "^2.3.0",
+    "lottie-react": "2.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-query": "^3.16.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "4.0.3",
+    "rxjs": "^6.6.3",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.11.10",
+    "@testing-library/react": "11.2.6",
+    "@testing-library/react-hooks": "5.1.1",
+    "@testing-library/user-event": "13.1.1",
+    "@types/autosize": "3.0.7",
+    "@types/enzyme": "3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/expect": "^1.20.4",
+    "@types/faker": "^4.1.5",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.8",
+    "@types/react": "^16.9.29",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-lottie": "^1.2.5",
+    "@types/react-router": "^5.1.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "babel-plugin-styled-components": "^1.10.7",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.4.4",
+    "eslint": "^7.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "faker": "4.1.0",
+    "gh-pages": "^3.1.0",
+    "husky": "^4.2.5",
+    "jest-junit": "^12.0.0",
+    "node-sass": "^6.0.1",
+    "source-map-explorer": "^2.5.2",
+    "ts-jest": "^26.5.0",
+    "ts-node": "^8.3.0",
+    "typescript": "4.1.5",
+    "web-vitals": "^2.1.2"
+  }
+}

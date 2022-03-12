@@ -1,0 +1,49 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+
+pool:
+  name: Azure Pipelines
+  demands: npm
+  vmImage: ubuntu-latest
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+- task: Npm@1
+  displayName: 'run lint'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run lint'
+
+- task: Npm@1
+  displayName: 'run tests'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run test:ci'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: junit.xml
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage/cobertura-coverage.xml'
+
+- task: Npm@1
+  displayName: 'run build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
+

@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "watchForFileChanges": true,
+  "execTimeout": 60000,
+  "defaultCommandTimeout": 4000,
+  "integrationFolder": "cypress/integration",
+  "pageLoadTimeout": 60000,
+  "viewportHeight": 680,
+  "viewportWidth": 1366
+}

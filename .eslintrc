@@ -1,0 +1,109 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "tsconfig.json",
+      "sourceType": "module"
+    },
+    "ecmaFeatures": {
+      "jsx": true,
+      "arrowFunctions": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "eslint-comments",
+    "jest",
+    "import",
+    "react",
+    "react-hooks"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    "max-len": [2, 90],
+    "object-curly-newline": "off",
+    "no-confusing-arrow": "off",
+    "operator-linebreak": [
+      "error",
+      "after", {
+        "overrides": {
+          "?": "before",
+          ":": "before"
+        }
+      }
+    ],
+    "keyword-spacing": ["error", { "before": true }],
+    "react/display-name": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-closing-tag-location": "error",
+    "react/jsx-uses-react": "off",
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+    "react/jsx-max-props-per-line": [2, { "when": "multiline" }],
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/button-has-type": "off",
+    "import/no-cycle": "off",
+    "import/no-named-as-default-member": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "import/order": ["error", {
+      "groups": [
+        ["external", "builtin"],
+        ["parent", "sibling", "internal", "index"]
+      ]
+    }],
+    "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/member-delimiter-style": "error",
+    "eslint-comments/disable-enable-pair": ["error", {"allowWholeFile": true}],
+    "indent": ["error", 2, { "SwitchCase": 1 }]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./"
+      }
+    },
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "fragment": "Fragment",
+      "version": "detect"
+    }
+  }
+}
