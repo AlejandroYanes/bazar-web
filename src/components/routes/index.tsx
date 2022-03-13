@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ProductsPage from 'components/pages/Products';
-
+import Layout from 'components/layout';
+import Landing from 'components/pages/Landing';
 
 const Routes: FunctionComponent = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={ProductsPage} />
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={Landing} />
+        </Switch>
+      </Layout>
     </BrowserRouter>
   );
 };

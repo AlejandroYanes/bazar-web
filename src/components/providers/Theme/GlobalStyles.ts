@@ -1,5 +1,4 @@
 import { createGlobalStyle, css } from 'styled-components';
-import { scrollThumbWidth } from 'activate-components';
 
 const mobileStyles = css`
   body {
@@ -25,52 +24,10 @@ const mobileStyles = css`
   }
 `;
 
-export const MobileGlobalStyles = createGlobalStyle`
-  ${mobileStyles};
-`;
-
-const getWebkitScrollBarThumbColor = (props) => {
-  const { theme: { colors } } = props;
-
-  return css`
-    background-color: ${colors.ACCENT};
-  `;
-};
-
-const getFirefoxScrollBarColor = (props) => {
-  const { theme: { colors } } = props;
-
-  return css`
-    scrollbar-color: ${colors.ACCENT} ${colors.BACKGROUND};
-  `;
-};
-
 export const PrimaryGlobalStyles = createGlobalStyle`
   ${mobileStyles};
 
-  body {
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-  }
-
-  *::-webkit-scrollbar {
-    width: ${scrollThumbWidth};
-  }
-
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    border: 1px solid ${({ theme }) => theme.colors.BACKGROUND};
-    ${getWebkitScrollBarThumbColor};
-  }
-
   * {
     -webkit-tap-highlight-color: transparent;
-    scrollbar-width: thin;
-    ${getFirefoxScrollBarColor};
   }
 `;

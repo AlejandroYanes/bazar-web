@@ -1,15 +1,12 @@
-import { AxiosResponse } from 'axios';
-import { CategoryModel } from 'models/category';
-import { get, PagedResponse } from './base';
+import { getAppWrite } from './base';
+import { ListResponse } from '../models/app-write';
+import { CategoryModel } from '../models/category';
 
-const endpoint = 'categories';
+const { REACT_APP_CATEGORIES_COLLECTION } = process.env;
 
 const categoriesApi = {
-  list: (): Promise<AxiosResponse<PagedResponse<CategoryModel>>> => {
-    return get(endpoint);
-  },
-  getTree: (): Promise<AxiosResponse<PagedResponse<CategoryModel>>> => {
-    return get(`${endpoint}/tree`);
+  list: (): Promise<ListResponse<CategoryModel>> => {
+    return getAppWrite().database.listDocuments(REACT_APP_CATEGORIES_COLLECTION);
   },
 };
 
