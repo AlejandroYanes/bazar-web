@@ -6,7 +6,9 @@ import {
   PickItem,
   FlexBox,
   SvgIcon,
-  Text, Title
+  Text,
+  Title,
+  Icons,
 } from 'activate-components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
@@ -34,14 +36,14 @@ const LandingPage: FC = () => {
 
   const categories = data.documents.map((cat) => (
     <PickItem value={cat.$id} key={cat.$id}>
-      <SvgIcon icon="HOME" size="page" color="BRAND" />
+      <SvgIcon icon={cat.icon as Icons} size="page" color="BRAND" />
       <Text color="brand" size="large" mT>{cat.name}</Text>
     </PickItem>
   ));
 
   return (
     <>
-      <Title level={1} color="brand" margin="16px auto">Categorias</Title>
+      <Title level={1} color="brand" margin="16px auto">Categorías</Title>
       <PickList color="brand" cols={2}>
         {categories}
       </PickList>

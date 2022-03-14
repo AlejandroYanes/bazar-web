@@ -9,7 +9,7 @@ const Layout:FC = (props) => {
     <FlexBox direction="column" align="stretch">
       <FlexBox padding="16px" align="center">
         <Input
-          placeholder="Search"
+          placeholder="Buscar"
           value={search}
           onChange={setSearch}
           style={{ flex: 1 }}
