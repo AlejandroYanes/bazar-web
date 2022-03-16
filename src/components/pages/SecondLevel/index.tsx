@@ -1,16 +1,12 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import {
-  SpinningDots,
-  FlexBox,
-  SvgIcon,
-  Title, LinkButton,
-} from 'activate-components';
+import { FlexBox, LinkButton, SpinningDots, SvgIcon, Title, } from 'activate-components';
 import categoriesApi from 'api/categories';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
+import PageBackButton from 'components/experience/PageBackButton';
 
 const SecondLevelPage: FC = () => {
   const { id } = useParams() as { id: string };
@@ -23,7 +19,10 @@ const SecondLevelPage: FC = () => {
     isLoading: isLoadingSubs,
     data: subs,
     error: subsError,
-  } = useQuery(QueryKey.FETCH_SUB_CATEGORIES, () => subCategoriesApi.listByCategory(id));
+  } = useQuery(
+    [QueryKey.FETCH_SUB_CATEGORIES, id],
+    () => subCategoriesApi.listByCategory(id),
+  );
 
   const isLoading = isLoadingCategory || isLoadingSubs;
   const error = categoryError || subsError;
@@ -43,7 +42,7 @@ const SecondLevelPage: FC = () => {
   }
 
   const subCategories = subs.documents.map((cat) => (
-    <LinkButton key={cat.$id} to="/">
+    <LinkButton key={cat.$id} to={`/category/${cat.$id}/products`}>
       <FlexBox align="center" justify="space-between" mT mB>
         <Title level={2}>{cat.name}</Title>
         <SvgIcon icon="CHEVRON_RIGHT" />
@@ -52,10 +51,12 @@ const SecondLevelPage: FC = () => {
   ));
 
   return (
-    <FlexBox direction="column" align="stretch" padding="16px">
-      <Title level={1} color="brand" margin="0 0 16px">{category.name}</Title>
-      {subCategories}
-    </FlexBox>
+    <>
+      <PageBackButton name={category.name} />
+      <FlexBox direction="column" align="stretch" padding="16px">
+        {subCategories}
+      </FlexBox>
+    </>
   );
 };
 

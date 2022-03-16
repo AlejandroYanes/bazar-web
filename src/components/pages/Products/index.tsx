@@ -1,24 +1,35 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
-import {
-  FlexBox,
-  formatCurrency,
-  Paragraph,
-  SpinningDots,
-  Text,
-  Title
-} from 'activate-components';
+import { FlexBox, SpinningDots } from 'activate-components';
 import productsApi from 'api/products';
+import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
+import ProductPreview from 'components/experience/ProductPreview';
+import PageBackButton from 'components/experience/PageBackButton';
 
 const ProductsPage: FC = () => {
   const { id } = useParams() as { id: string };
-  const { isLoading, data, error } = useQuery(
-    QueryKey.FETCH_PRODUCTS,
+  const {
+    isLoading: loadingCategory,
+    data: category,
+    error: categoryError,
+  } = useQuery(
+    [QueryKey.FETCH_SUB_CATEGORY, id],
+    () => subCategoriesApi.get(id),
+  );
+  const {
+    isLoading: loadingProduct,
+    data: products,
+    error: productsError,
+  } = useQuery(
+    [QueryKey.FETCH_PRODUCTS, id],
     () => productsApi.listByCategory(id),
   );
+
+  const isLoading = loadingCategory || loadingProduct;
+  const error = categoryError || productsError;
 
   if (error) {
     return (
@@ -34,16 +45,21 @@ const ProductsPage: FC = () => {
     );
   }
 
-  const products = data.documents.map((product) => (
-    <FlexBox direction="column" align="stretch" key={product.$id} mT mB>
-      <Title level={3}>{product.name}</Title>
-      <Text>{formatCurrency(product.price)}</Text>
-      <Paragraph>{product.description}</Paragraph>
-    </FlexBox>
+  const productPreviews = products.documents.map((product) => (
+    <ProductPreview key={product.$id} {...product} />
   ));
 
   return (
-    <FlexBox padding="16px">{products}</FlexBox>
+    <>
+      <PageBackButton name={category.name} />
+      <FlexBox
+        direction="column"
+        align="stretch"
+        padding="16px"
+      >
+        {productPreviews}
+      </FlexBox>
+    </>
   );
 };
 

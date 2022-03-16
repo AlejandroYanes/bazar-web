@@ -6,8 +6,8 @@ const Layout:FC = (props) => {
   const [search, setSearch] = useState('');
 
   return (
-    <FlexBox direction="column" align="stretch">
-      <FlexBox padding="16px" align="center">
+    <FlexBox as="article" direction="column" align="stretch">
+      <FlexBox as="header" padding="16px" align="center">
         <Input
           placeholder="Buscar"
           value={search}
