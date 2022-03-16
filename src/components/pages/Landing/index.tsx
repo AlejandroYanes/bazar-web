@@ -2,11 +2,9 @@ import { FC } from 'react';
 import { useQuery } from 'react-query';
 import {
   SpinningDots,
-  PickList,
-  PickItem,
   FlexBox,
   SvgIcon,
-  Text, Title
+  Title, LinkButton,
 } from 'activate-components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
@@ -33,19 +31,19 @@ const LandingPage: FC = () => {
   }
 
   const categories = data.documents.map((cat) => (
-    <PickItem value={cat.$id} key={cat.$id}>
-      <SvgIcon icon="HOME" size="page" color="BRAND" />
-      <Text color="brand" size="large" mT>{cat.name}</Text>
-    </PickItem>
+    <LinkButton key={cat.$id} to={`/category/${cat.$id}`}>
+      <FlexBox align="center" justify="space-between" mT mB>
+        <Title level={2}>{cat.name}</Title>
+        <SvgIcon icon="CHEVRON_RIGHT" />
+      </FlexBox>
+    </LinkButton>
   ));
 
   return (
-    <>
-      <Title level={1} color="brand" margin="16px auto">Categorias</Title>
-      <PickList color="brand" cols={2}>
-        {categories}
-      </PickList>
-    </>
+    <FlexBox direction="column" align="stretch" padding="16px">
+      <Title level={1} color="brand" margin="0 0 16px">Categorías</Title>
+      {categories}
+    </FlexBox>
   );
 };
 

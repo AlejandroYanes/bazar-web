@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Configuration } from 'activate-components';
-import { LifeIsABeachTheme, } from 'styles/themes';
+import { SummerVibesTheme, } from 'styles/themes';
 import { PrimaryGlobalStyles } from './GlobalStyles';
 
 
 const palette = {
-  ...LifeIsABeachTheme,
+  ...SummerVibesTheme,
   BACKGROUND: '#ffffff',
 };
 
