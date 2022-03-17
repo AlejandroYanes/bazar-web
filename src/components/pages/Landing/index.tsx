@@ -9,6 +9,7 @@ import {
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
+import { SearchBox } from 'components/experience/Search';
 
 const LandingPage: FC = () => {
   const { isLoading, data, error } = useQuery(
@@ -40,10 +41,13 @@ const LandingPage: FC = () => {
   ));
 
   return (
-    <FlexBox direction="column" align="stretch" padding="16px">
-      <Title level={1} color="brand" margin="0 0 16px">Categorías</Title>
-      {categories}
-    </FlexBox>
+    <>
+      <SearchBox />
+      <FlexBox direction="column" align="stretch" padding="0 16px 32px">
+        <Title level={1} color="brand" margin="0">Categorías</Title>
+        {categories}
+      </FlexBox>
+    </>
   );
 };
 

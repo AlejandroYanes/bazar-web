@@ -17,10 +17,22 @@ const productsApi = {
   get: (product: string): Promise<ProductModel> => {
     return getAppWrite().database.getDocument(REACT_APP_PRODUCTS_COLLECTION, product);
   },
-  fetchThumbnail: (img: string): URL => {
+  fetchThumbnail: (image: string): URL => {
     return getAppWrite()
       .storage
-      .getFilePreview(REACT_APP_BUCKET_ID, img, 80, 80, ImageGravity.TOP_LEFT, 50);
+      .getFilePreview(REACT_APP_BUCKET_ID, image, 80, 80, ImageGravity.TOP_LEFT, 50);
+  },
+  fetchPhoto: (image: string, width: number): URL => {
+    return getAppWrite()
+      .storage
+      .getFilePreview(
+        REACT_APP_BUCKET_ID,
+        image,
+        width,
+        undefined,
+        ImageGravity.TOP_LEFT,
+        100,
+      );
   },
 };
 

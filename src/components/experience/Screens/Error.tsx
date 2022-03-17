@@ -13,7 +13,7 @@ const ErrorScreen: FunctionComponent<Props> = (props) => {
     <MessageScreen
       icon="EXCLAMATION_TRIANGLE"
       color="WARNING"
-      title="Oops, sorry about that."
+      title="Oo, algo salió mal."
       lines={lines}
       {...rest}
     >
