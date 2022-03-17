@@ -8,7 +8,7 @@ import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import ProductPreview from 'components/experience/ProductPreview';
 import PageBackButton from 'components/experience/PageBackButton';
-import { SearchBox } from '../../experience/Search';
+import TopBar from 'components/experience/TopBar';
 
 const ProductsPage: FC = () => {
   const { id } = useParams() as { id: string };
@@ -52,7 +52,7 @@ const ProductsPage: FC = () => {
 
   return (
     <>
-      <SearchBox />
+      <TopBar />
       <PageBackButton name={category.name} />
       <FlexBox
         direction="column"

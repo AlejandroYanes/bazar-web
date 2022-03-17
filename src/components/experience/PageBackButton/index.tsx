@@ -11,7 +11,7 @@ const Button = styled.button`
   border: none;
   outline: none;
   background: transparent;
-  padding: 0 16px 16px;
+  padding: 16px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -32,7 +32,7 @@ const PageBackButton: FC<Props> = (props) => {
   return (
     <Button onClick={goBack}>
       <SvgIcon icon="CHEVRON_LEFT" color="BRAND" />
-      <Title level={2} size={32} color="brand">{name}</Title>
+      <Title level={1} color="brand">{name}</Title>
     </Button>
   );
 };

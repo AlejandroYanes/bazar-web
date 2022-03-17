@@ -1,15 +1,10 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import {
-  SpinningDots,
-  FlexBox,
-  SvgIcon,
-  Title, LinkButton,
-} from 'activate-components';
+import { FlexBox, LinkButton, SpinningDots, SvgIcon, Title, } from 'activate-components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
-import { SearchBox } from 'components/experience/Search';
+import TopBar from 'components/experience/TopBar';
 
 const LandingPage: FC = () => {
   const { isLoading, data, error } = useQuery(
@@ -42,9 +37,9 @@ const LandingPage: FC = () => {
 
   return (
     <>
-      <SearchBox />
+      <TopBar />
+      <Title level={1} color="brand" margin="0" padding="16px">Categorías</Title>
       <FlexBox direction="column" align="stretch" padding="0 16px 32px">
-        <Title level={1} color="brand" margin="0">Categorías</Title>
         {categories}
       </FlexBox>
     </>

@@ -7,7 +7,7 @@ import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import PageBackButton from 'components/experience/PageBackButton';
-import { SearchBox } from '../../experience/Search';
+import TopBar from 'components/experience/TopBar';
 
 const SecondLevelPage: FC = () => {
   const { id } = useParams() as { id: string };
@@ -53,7 +53,7 @@ const SecondLevelPage: FC = () => {
 
   return (
     <>
-      <SearchBox />
+      <TopBar />
       <PageBackButton name={category.name} />
       <FlexBox direction="column" align="stretch" padding="0 16px 32px">
         {subCategories}
