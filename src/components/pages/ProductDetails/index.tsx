@@ -8,7 +8,6 @@ import {
   formatCurrency,
   Paragraph,
   SpinningDots,
-  Text,
   Title,
   AbsoluteContent,
   IconButton,
@@ -77,37 +76,39 @@ const ProductDetailsPage: FC = () => {
   return (
     <>
       <ImageHolder>
-        <AbsoluteContent top={16} left={16}>
-          <IconButton
-            onClick={goBack}
-            size="large"
-            variant="fill"
-            color="background"
-            icon="CHEVRON_LEFT"
-          />
+        <AbsoluteContent top={0} left={0} right={0}>
+          <FlexBox width="100%" justify="space-between" align="center" padding="4px 8px">
+            <IconButton
+              onClick={goBack}
+              size="large"
+              variant="flat"
+              color="background"
+              icon="CHEVRON_LEFT"
+            />
+            <RenderIf condition={product?.images.length > 1}>
+              <Counter>{`${index + 1} / ${product?.images.length}`}</Counter>
+            </RenderIf>
+          </FlexBox>
         </AbsoluteContent>
-        <AbsoluteContent top={window.innerWidth / 2} left={16}>
-          <IconButton
-            disabled
-            onClick={showPrevious}
-            size="large"
-            variant="fill"
-            color="brand"
-            icon="CHEVRON_LEFT"
-          />
-        </AbsoluteContent>
-        <AbsoluteContent top={window.innerWidth / 2} right={16}>
-          <IconButton
-            onClick={showNext}
-            size="large"
-            variant="fill"
-            color="brand"
-            icon="CHEVRON_RIGHT"
-          />
-        </AbsoluteContent>
-        <RenderIf condition={product?.images.length > 0}>
-          <AbsoluteContent bottom={16} right={16}>
-            <Counter>{`${index + 1} / ${product?.images.length}`}</Counter>
+        <RenderIf condition={product?.images.length > 1}>
+          <AbsoluteContent top={window.innerWidth / 2} left={16}>
+            <IconButton
+              disabled
+              onClick={showPrevious}
+              size="large"
+              variant="fill"
+              color="brand"
+              icon="CHEVRON_LEFT"
+            />
+          </AbsoluteContent>
+          <AbsoluteContent top={window.innerWidth / 2} right={16}>
+            <IconButton
+              onClick={showNext}
+              size="large"
+              variant="fill"
+              color="brand"
+              icon="CHEVRON_RIGHT"
+            />
           </AbsoluteContent>
         </RenderIf>
         <img
@@ -118,16 +119,17 @@ const ProductDetailsPage: FC = () => {
         />
       </ImageHolder>
       <FlexBox direction="column" align="stretch" padding="16px">
-        <Title level={2} mB mT>{product.name}</Title>
-        <Text size="large" weight="bold" mB>{formatCurrency(product.price)}</Text>
+        <Title level={3} size={24} mB mT>{product.name}</Title>
+        <Title level={3} size={28} weight="bold" mB>
+          {formatCurrency(product.price)}
+        </Title>
         <Paragraph>{product.description}</Paragraph>
         <Button
           onClick={() => undefined}
           label="AÑADIR AL CARRITO"
           variant="fill"
           color="brand"
-          mT
-          mB
+          margin="64px 0 0"
         />
       </FlexBox>
     </>

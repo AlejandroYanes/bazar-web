@@ -31,8 +31,8 @@ const PageBackButton: FC<Props> = (props) => {
   const { goBack } = useHistory();
   return (
     <Button onClick={goBack}>
-      <SvgIcon icon="CHEVRON_LEFT" color="BRAND" />
-      <Title level={1} color="brand">{name}</Title>
+      <SvgIcon icon="CHEVRON_LEFT" color="FONT" />
+      <Title level={1} size={32} ellipsis>{name}</Title>
     </Button>
   );
 };

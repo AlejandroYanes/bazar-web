@@ -1,6 +1,13 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { FlexBox, LinkButton, SpinningDots, SvgIcon, Title, } from 'activate-components';
+import {
+  FlexBox,
+  Icons,
+  LinkButton,
+  SpinningDots,
+  SvgIcon,
+  Title,
+} from 'activate-components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
@@ -38,7 +45,9 @@ const LandingPage: FC = () => {
   return (
     <>
       <TopBar />
-      <Title level={1} color="brand" margin="0" padding="16px">Categorías</Title>
+      <Title level={1} size={32} margin="0" padding="16px">
+        Categorías
+      </Title>
       <FlexBox direction="column" align="stretch" padding="0 16px 32px">
         {categories}
       </FlexBox>
