@@ -50,11 +50,9 @@
   "dependencies": {
     "activate-components": "^0.0.13",
     "appwrite": "^7.0.0",
-    "autosize": "^4.0.2",
     "axios": "0.21.2",
     "date-fns": "^2.16.1",
     "framer-motion": "^2.3.0",
-    "lottie-react": "2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-query": "^3.16.1",

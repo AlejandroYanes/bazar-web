@@ -5,7 +5,7 @@ export const LifeIsABeachTheme = {
 
 export const SummerVibesTheme = {
   BRAND: '#017b62',
-  ACCENT: '#e03301',
+  ACCENT: '#ff4500',
 };
 
 export const DuskLightsTheme = {
