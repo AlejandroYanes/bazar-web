@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useQuery } from 'react-query';
 import {
   FlexBox,
-  Icons,
   LinkButton,
   SpinningDots,
   SvgIcon,

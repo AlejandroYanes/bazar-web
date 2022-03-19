@@ -6,7 +6,6 @@ import categoriesApi from 'api/categories';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
-import PageBackButton from 'components/experience/PageBackButton';
 import TopBar from 'components/experience/TopBar';
 
 const SecondLevelPage: FC = () => {
@@ -54,7 +53,7 @@ const SecondLevelPage: FC = () => {
   return (
     <>
       <TopBar />
-      <PageBackButton name={category.name} />
+      <Title level={1} size={32} padding="16px" ellipsis>{category.name}</Title>
       <FlexBox direction="column" align="stretch" padding="0 16px 32px">
         {subCategories}
       </FlexBox>

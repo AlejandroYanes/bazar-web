@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Configuration } from 'activate-components';
+import { Configuration, NotificationCenter } from 'activate-components';
 import { SummerVibesTheme, } from 'styles/themes';
 import { PrimaryGlobalStyles } from './GlobalStyles';
 
@@ -16,6 +16,7 @@ const ThemeProvider: FunctionComponent = (props) => {
     <Configuration palette={palette}>
       <PrimaryGlobalStyles />
       {children}
+      <NotificationCenter />
     </Configuration>
   );
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { getFontColor } from 'activate-components';
+import { getBgdColor, getFontColor } from 'activate-components';
 
-export const ImageHolder = styled.div`
+export const ImageHolder = styled.header`
   position: relative;
   width: 100%;
   min-height: 360px;
@@ -14,4 +14,16 @@ export const Counter = styled.span`
   color: white;
   font-weight: 700;
   background-color: ${getFontColor};
+`;
+
+export const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: ${getBgdColor};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

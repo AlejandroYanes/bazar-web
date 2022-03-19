@@ -1,13 +1,12 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
-import { FlexBox, SpinningDots } from 'activate-components';
+import { FlexBox, SpinningDots, Title } from 'activate-components';
 import productsApi from 'api/products';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import ProductPreview from 'components/experience/ProductPreview';
-import PageBackButton from 'components/experience/PageBackButton';
 import TopBar from 'components/experience/TopBar';
 
 const ProductsPage: FC = () => {
@@ -53,7 +52,7 @@ const ProductsPage: FC = () => {
   return (
     <>
       <TopBar />
-      <PageBackButton name={category.name} />
+      <Title level={1} size={32} padding="16px" ellipsis>{category.name}</Title>
       <FlexBox
         direction="column"
         align="stretch"

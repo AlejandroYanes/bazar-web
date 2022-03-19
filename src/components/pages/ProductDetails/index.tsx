@@ -1,26 +1,38 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { AppwriteException } from 'appwrite';
+import * as faker from 'faker';
 import {
+  AbsoluteContent,
+  Button,
   FlexBox,
   formatCurrency,
+  IconButton, Modal,
+  NotificationType,
   Paragraph,
-  SpinningDots,
-  Title,
-  AbsoluteContent,
-  IconButton,
-  Button,
-  useSimplePagination,
   RenderIf,
+  showNotification,
+  SpinningDots, Text,
+  Title,
+  useSimplePagination,
 } from 'activate-components';
+import { AddCircledOutline, RemoveEmpty } from 'iconoir-react';
+import { CartModel } from 'models/cart';
 import productsApi from 'api/products';
 import { QueryKey } from 'components/providers/Query';
+import { useCart } from 'components/providers/Cart';
 import { ErrorScreen, MessageScreen } from 'components/experience/Screens';
-import { ImageHolder, Counter } from './styled';
+import IconoirIcon from 'components/experience/IconoirIcon';
+import { Counter, ImageHolder, Footer } from './styled';
 
 const ProductDetailsPage: FC = () => {
+  const { addToCart } = useCart();
+
+  const [showModal, setShowModal] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
   const { goBack } = useHistory();
   const { id } = useParams() as { id: string };
   const { isLoading, data: product, error } = useQuery(
@@ -33,12 +45,31 @@ const ProductDetailsPage: FC = () => {
     goNext: showNext,
     goBack: showPrevious,
   } = useSimplePagination(product?.images?.length, 0);
+
   const imgUrl = useMemo<URL | undefined>(() => {
     if (!isLoading && product) {
       return productsApi.fetchPhoto(product.images[index],window.innerWidth);
     }
     return undefined;
   }, [isLoading, index]);
+
+  const handleAddToCart = () => {
+    const { name, price, thumbnail } = product;
+    addToCart({
+      $id: faker.random.uuid(),
+      name,
+      price,
+      thumbnail,
+      quantity,
+    } as CartModel);
+    setShowModal(false);
+    setQuantity(1);
+    showNotification({
+      type: NotificationType.SUCCESS,
+      title: name,
+      message: 'agregado al carrito',
+    });
+  };
 
   if (error) {
     if ((error as AppwriteException).code === 404) {
@@ -77,11 +108,17 @@ const ProductDetailsPage: FC = () => {
     <>
       <ImageHolder>
         <AbsoluteContent top={0} left={0} right={0}>
-          <FlexBox width="100%" justify="space-between" align="center" padding="4px 8px">
+          <FlexBox
+            height={80}
+            width="100%"
+            justify="space-between"
+            align="center"
+            padding="16px"
+          >
             <IconButton
               onClick={goBack}
               size="large"
-              variant="flat"
+              variant="fill"
               color="background"
               icon="CHEVRON_LEFT"
             />
@@ -118,20 +155,62 @@ const ProductDetailsPage: FC = () => {
           alt={product.name}
         />
       </ImageHolder>
-      <FlexBox direction="column" align="stretch" padding="16px">
+      <FlexBox direction="column" align="stretch" padding="16px 16px 120px">
         <Title level={3} size={24} mB mT>{product.name}</Title>
         <Title level={3} size={28} weight="bold" mB>
           {formatCurrency(product.price)}
         </Title>
         <Paragraph>{product.description}</Paragraph>
+      </FlexBox>
+      <Footer>
         <Button
-          onClick={() => undefined}
-          label="AÑADIR AL CARRITO"
+          onClick={() => setShowModal(true)}
+          label="AGREGAR AL CARRITO"
           variant="fill"
           color="brand"
-          margin="64px 0 0"
         />
-      </FlexBox>
+      </Footer>
+      <Modal
+        title="Agregar al Carrito"
+        size="large"
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+        footer={(
+          <>
+            <Button
+              onClick={() => setShowModal(false)}
+              label="Cancelar"
+              variant="outline"
+              color="brand"
+              mR
+            />
+            <Button
+              onClick={handleAddToCart}
+              label="Agregar"
+              variant="fill"
+              color="brand"
+            />
+          </>
+        )}
+      >
+        <Text size="large" style={{ marginRight: 'auto' }} ellipsis>{product.name}</Text>
+        <FlexBox align="center" mT mB>
+          <Text style={{ marginRight: 'auto' }} ellipsis>Cantidad</Text>
+          <FlexBox align="center">
+            <button onClick={() => setQuantity(quantity - 1)}>
+              <IconoirIcon icon={RemoveEmpty} />
+            </button>
+            <Text mR mL>{quantity}</Text>
+            <button onClick={() => setQuantity(quantity + 1)}>
+              <IconoirIcon icon={AddCircledOutline} />
+            </button>
+          </FlexBox>
+        </FlexBox>
+        <FlexBox justify="space-between" align="center" mT>
+          <Text>Precio:</Text>
+          <Text weight="bold">{formatCurrency(product.price * quantity)}</Text>
+        </FlexBox>
+      </Modal>
     </>
   );
 };
