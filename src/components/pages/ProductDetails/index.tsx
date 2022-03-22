@@ -6,10 +6,10 @@ import { AppwriteException } from 'appwrite';
 import * as faker from 'faker';
 import {
   AbsoluteContent,
-  Button,
+  Button, ChevronLeftIcon, ChevronRightIcon,
   FlexBox,
   formatCurrency,
-  IconButton, Modal,
+  IconButton, InfoCircleIcon, Modal,
   NotificationType,
   Paragraph,
   RenderIf,
@@ -76,8 +76,7 @@ const ProductDetailsPage: FC = () => {
       return (
         <MessageScreen
           margin="48px 0 0 0"
-          icon="INFO_CIRCLE"
-          color="BRAND"
+          icon={<InfoCircleIcon color="INFO" height={72} width={72} />}
           title="No hay nada aqui"
           lines={['No encontramos la información del producto.']}
         >
@@ -118,9 +117,9 @@ const ProductDetailsPage: FC = () => {
             <IconButton
               onClick={goBack}
               size="large"
-              variant="fill"
-              color="background"
-              icon="CHEVRON_LEFT"
+              variant="flat"
+              color="font"
+              icon={<ChevronLeftIcon />}
             />
             <RenderIf condition={product?.images.length > 1}>
               <Counter>{`${index + 1} / ${product?.images.length}`}</Counter>
@@ -130,12 +129,11 @@ const ProductDetailsPage: FC = () => {
         <RenderIf condition={product?.images.length > 1}>
           <AbsoluteContent top={window.innerWidth / 2} left={16}>
             <IconButton
-              disabled
               onClick={showPrevious}
               size="large"
               variant="fill"
-              color="brand"
-              icon="CHEVRON_LEFT"
+              color="font"
+              icon={<ChevronLeftIcon />}
             />
           </AbsoluteContent>
           <AbsoluteContent top={window.innerWidth / 2} right={16}>
@@ -143,8 +141,8 @@ const ProductDetailsPage: FC = () => {
               onClick={showNext}
               size="large"
               variant="fill"
-              color="brand"
-              icon="CHEVRON_RIGHT"
+              color="font"
+              icon={<ChevronRightIcon />}
             />
           </AbsoluteContent>
         </RenderIf>

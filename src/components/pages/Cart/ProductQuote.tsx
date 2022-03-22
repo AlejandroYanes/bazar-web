@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { FlexBox, formatCurrency, Text, Title } from 'activate-components';
+import { FlexBox, formatCurrency, Text, Title, IconButton } from 'activate-components';
 import { AddCircledOutline, RemoveEmpty, Trash } from 'iconoir-react';
 import { CartModel } from 'models/cart';
 import productsApi from 'api/products';
@@ -30,16 +30,20 @@ const ProductQuote: FC<CartModel> = (props) => {
         </FlexBox>
       </FlexBox>
       <FlexBox align="center" padding="20px 0">
-        <button onClick={() => removeFromCart($id)} style={{ marginRight: 'auto' }}>
-          <IconoirIcon icon={Trash} />
-        </button>
-        <button onClick={() => updateProduct({ ...props, quantity: quantity - 1 })}>
-          <IconoirIcon icon={RemoveEmpty} />
-        </button>
+        <IconButton
+          icon={<IconoirIcon icon={Trash} width={32} height={32} />}
+          onClick={() => removeFromCart($id)}
+          style={{ marginRight: 'auto' }}
+        />
+        <IconButton
+          icon={<IconoirIcon icon={RemoveEmpty} width={32} height={32} />}
+          onClick={() => updateProduct({ ...props, quantity: quantity - 1 })}
+        />
         <Text mR mL>{quantity}</Text>
-        <button onClick={() => updateProduct({ ...props, quantity: quantity + 1 })}>
-          <IconoirIcon icon={AddCircledOutline} />
-        </button>
+        <IconButton
+          icon={<IconoirIcon icon={AddCircledOutline} width={32} height={32} />}
+          onClick={() => updateProduct({ ...props, quantity: quantity + 1 })}
+        />
       </FlexBox>
     </FlexBox>
   );

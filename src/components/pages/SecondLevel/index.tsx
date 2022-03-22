@@ -1,7 +1,13 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router';
-import { FlexBox, LinkButton, SpinningDots, SvgIcon, Title, } from 'activate-components';
+import {
+  ChevronRightIcon,
+  FlexBox,
+  LinkButton,
+  SpinningDots,
+  Title,
+} from 'activate-components';
 import categoriesApi from 'api/categories';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
@@ -45,7 +51,7 @@ const SecondLevelPage: FC = () => {
     <LinkButton key={cat.$id} to={`/category/${cat.$id}/products`}>
       <FlexBox align="center" justify="space-between" mT mB>
         <Title level={2}>{cat.name}</Title>
-        <SvgIcon icon="CHEVRON_RIGHT" />
+        <ChevronRightIcon />
       </FlexBox>
     </LinkButton>
   ));

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { SvgIcon, Title } from 'activate-components';
+import { ChevronLeftIcon, Title } from 'activate-components';
 
 interface Props {
   name: string;
@@ -31,7 +31,7 @@ const PageBackButton: FC<Props> = (props) => {
   const { goBack } = useHistory();
   return (
     <Button onClick={goBack}>
-      <SvgIcon icon="CHEVRON_LEFT" color="FONT" />
+      <ChevronLeftIcon color="FONT" />
       <Title level={1} size={32} ellipsis>{name}</Title>
     </Button>
   );

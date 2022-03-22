@@ -2,10 +2,11 @@ import { FC, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Avatar,
-  Button,
+  Button, ChevronLeftIcon,
   FlexBox,
   formatCurrency,
-  IconButton, RenderIf,
+  IconButton,
+  RenderIf,
   Text,
   Title
 } from 'activate-components';
@@ -16,8 +17,9 @@ import { Footer } from './styled/page';
 const CartPage: FC = () => {
   const { goBack } = useHistory();
   const { products } = useCart();
-  const { total, quotes } = useMemo(() => ({
-    total: products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0),
+  const { count, cost, quotes } = useMemo(() => ({
+    cost: products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0),
+    count: products.reduce((acc, prod) => acc + prod.quantity, 0),
     quotes: products.map((prod) => (
       <ProductQuote key={prod.$id} {...prod} />
     ))
@@ -26,13 +28,13 @@ const CartPage: FC = () => {
   return (
     <>
       <FlexBox justify="space-between" align="center" padding="16px" height={80}>
-        <IconButton icon="CHEVRON_LEFT" onClick={goBack} size="large" />
+        <IconButton icon={<ChevronLeftIcon />} onClick={goBack} size="large" />
         <Avatar src="user1" />
       </FlexBox>
-      <FlexBox justify="space-between" padding="16px">
+      <FlexBox justify="space-between" align="center" padding="16px">
         <Title level={1} size={32}>Cart</Title>
-        <RenderIf condition={products.length > 1}>
-          <Text>{`${products.length} articulos`}</Text>
+        <RenderIf condition={count > 1}>
+          <Text size="large">{`${count} articulos`}</Text>
         </RenderIf>
       </FlexBox>
       <FlexBox direction="column" align="stretch" padding="16px 16px 120px">
@@ -42,7 +44,7 @@ const CartPage: FC = () => {
         <Footer>
           <FlexBox justify="space-between" margin="0 0 24px 0">
             <Text size="large">Total:</Text>
-            <Text size="large" weight="bold">{formatCurrency(total)}</Text>
+            <Text size="large" weight="bold">{formatCurrency(cost)}</Text>
           </FlexBox>
           <Button onClick={() => undefined} label="PAGAR" variant="fill" color="brand" />
         </Footer>

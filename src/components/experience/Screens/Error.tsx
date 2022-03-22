@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PositionProps } from 'activate-components';
+import { ExclamationTriangleIcon, PositionProps } from 'activate-components';
 import MessageScreen from './Message';
 
 interface Props extends PositionProps {
@@ -11,8 +11,7 @@ const ErrorScreen: FunctionComponent<Props> = (props) => {
 
   return (
     <MessageScreen
-      icon="EXCLAMATION_TRIANGLE"
-      color="WARNING"
+      icon={<ExclamationTriangleIcon color="WARNING" width={72} height={72} />}
       title="Oo, algo salió mal."
       lines={lines}
       {...rest}
