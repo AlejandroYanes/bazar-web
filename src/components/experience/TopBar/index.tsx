@@ -2,19 +2,20 @@ import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Avatar,
-  ChevronLeftIcon,
   FlexBox,
   IconButton,
-  RenderIf, SearchIcon, TicketIcon
+  RenderIf,
 } from 'activate-components';
+import { SimpleCart, ArrowLeft, Search } from 'iconoir-react';
+import IconoirIcon from '../IconoirIcon';
 
 const TopBar: FC = () => {
   const { push, location: { pathname }, goBack } = useHistory();
   return (
-    <FlexBox justify="flex-end" align="center" padding="16px" height={80}>
+    <FlexBox justify="flex-end" align="center" padding="16px 16px 16px 0" height={80}>
       <RenderIf condition={pathname !== '/'}>
         <IconButton
-          icon={<ChevronLeftIcon />}
+          icon={<IconoirIcon icon={ArrowLeft} />}
           size="large"
           onClick={goBack}
           margin="0 auto 0 0"
@@ -22,12 +23,12 @@ const TopBar: FC = () => {
         />
       </RenderIf>
       <IconButton
-        icon={<SearchIcon />}
+        icon={<IconoirIcon icon={Search} />}
         size="large"
         onClick={() => undefined}
       />
       <IconButton
-        icon={<TicketIcon />}
+        icon={<IconoirIcon icon={SimpleCart} />}
         size="large"
         onClick={() => push('/cart')}
         mL

@@ -2,17 +2,19 @@ import { FC, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Avatar,
-  Button, ChevronLeftIcon,
+  Button,
   FlexBox,
-  formatCurrency,
   IconButton,
   RenderIf,
   Text,
   Title
 } from 'activate-components';
+import { ArrowLeft } from 'iconoir-react';
+import { formatCurrency } from 'helpers/numbers';
 import { useCart } from 'components/providers/Cart';
 import ProductQuote from './ProductQuote';
 import { Footer } from './styled/page';
+import IconoirIcon from '../../experience/IconoirIcon';
 
 const CartPage: FC = () => {
   const { goBack } = useHistory();
@@ -27,8 +29,17 @@ const CartPage: FC = () => {
 
   return (
     <>
-      <FlexBox justify="space-between" align="center" padding="16px" height={80}>
-        <IconButton icon={<ChevronLeftIcon />} onClick={goBack} size="large" />
+      <FlexBox
+        justify="space-between"
+        align="center"
+        padding="16px 16px 16px 0"
+        height={80}
+      >
+        <IconButton
+          icon={<IconoirIcon icon={ArrowLeft} />}
+          onClick={goBack}
+          size="large"
+        />
         <Avatar src="user1" />
       </FlexBox>
       <FlexBox justify="space-between" align="center" padding="16px">

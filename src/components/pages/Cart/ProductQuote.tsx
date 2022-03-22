@@ -1,11 +1,12 @@
 import { FC, useMemo } from 'react';
-import { FlexBox, formatCurrency, Text, Title, IconButton } from 'activate-components';
+import { FlexBox, Text, Title, IconButton } from 'activate-components';
 import { AddCircledOutline, RemoveEmpty, Trash } from 'iconoir-react';
 import { CartModel } from 'models/cart';
 import productsApi from 'api/products';
 import { useCart } from 'components/providers/Cart';
 import IconoirIcon from 'components/experience/IconoirIcon';
 import { ImageHolder } from './styled/product-quote';
+import { formatCurrency } from 'helpers/numbers';
 
 const ProductQuote: FC<CartModel> = (props) => {
   const { updateProduct, removeFromCart } = useCart();
@@ -19,7 +20,7 @@ const ProductQuote: FC<CartModel> = (props) => {
           <img src={imgUrl.href} width={80} height={80} alt={name} />
         </ImageHolder>
         <FlexBox direction="column" align="stretch" padding="0 0 8px 8px">
-          <Title level={3} weight="bold" margin="0 0 8px 0" ellipsis>{name}</Title>
+          <Title level={3} weight="bold" margin="0 0 8px 0">{name}</Title>
           <Text
             size="large"
             weight="bold"

@@ -6,10 +6,13 @@ import { AppwriteException } from 'appwrite';
 import * as faker from 'faker';
 import {
   AbsoluteContent,
-  Button, ChevronLeftIcon, ChevronRightIcon,
+  Button,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   FlexBox,
-  formatCurrency,
-  IconButton, InfoCircleIcon, Modal,
+  IconButton,
+  InfoCircleIcon,
+  Modal,
   NotificationType,
   Paragraph,
   RenderIf,
@@ -18,8 +21,9 @@ import {
   Title,
   useSimplePagination,
 } from 'activate-components';
-import { AddCircledOutline, RemoveEmpty } from 'iconoir-react';
+import { AddCircledOutline, RemoveEmpty, ArrowLeft } from 'iconoir-react';
 import { CartModel } from 'models/cart';
+import { formatCurrency } from 'helpers/numbers';
 import productsApi from 'api/products';
 import { QueryKey } from 'components/providers/Query';
 import { useCart } from 'components/providers/Cart';
@@ -112,14 +116,14 @@ const ProductDetailsPage: FC = () => {
             width="100%"
             justify="space-between"
             align="center"
-            padding="16px"
+            padding="16px 16px 16px 0"
           >
             <IconButton
               onClick={goBack}
               size="large"
               variant="flat"
               color="font"
-              icon={<ChevronLeftIcon />}
+              icon={<IconoirIcon icon={ArrowLeft} />}
             />
             <RenderIf condition={product?.images.length > 1}>
               <Counter>{`${index + 1} / ${product?.images.length}`}</Counter>
@@ -195,13 +199,15 @@ const ProductDetailsPage: FC = () => {
         <FlexBox align="center" mT mB>
           <Text style={{ marginRight: 'auto' }} ellipsis>Cantidad</Text>
           <FlexBox align="center">
-            <button onClick={() => setQuantity(quantity - 1)}>
-              <IconoirIcon icon={RemoveEmpty} />
-            </button>
+            <IconButton
+              icon={<IconoirIcon icon={RemoveEmpty} width={32} height={32} />}
+              onClick={() => setQuantity(quantity - 1)}
+            />
             <Text mR mL>{quantity}</Text>
-            <button onClick={() => setQuantity(quantity + 1)}>
-              <IconoirIcon icon={AddCircledOutline} />
-            </button>
+            <IconButton
+              icon={<IconoirIcon icon={AddCircledOutline} width={32} height={32} />}
+              onClick={() => setQuantity(quantity + 1)}
+            />
           </FlexBox>
         </FlexBox>
         <FlexBox justify="space-between" align="center" mT>
