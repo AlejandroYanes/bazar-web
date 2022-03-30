@@ -5,7 +5,6 @@ import {
   ChevronRightIcon,
   FlexBox,
   LinkButton,
-  SpinningDots,
   Title,
 } from 'activate-components';
 import categoriesApi from 'api/categories';
@@ -13,6 +12,7 @@ import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import TopBar from 'components/experience/TopBar';
+import LoadingPage from '../../experience/LoadingPage';
 
 const SecondLevelPage: FC = () => {
   const { id } = useParams() as { id: string };
@@ -40,11 +40,7 @@ const SecondLevelPage: FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <FlexBox direction="column" justify="center" align="center" height="120px">
-        <SpinningDots />
-      </FlexBox>
-    );
+    return <LoadingPage />;
   }
 
   const subCategories = subs.documents.map((cat) => (

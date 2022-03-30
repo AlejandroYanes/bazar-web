@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
-import { FlexBox, SpinningDots, Title } from 'activate-components';
+import { FlexBox, Title } from 'activate-components';
 import productsApi from 'api/products';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import ProductPreview from 'components/experience/ProductPreview';
 import TopBar from 'components/experience/TopBar';
+import LoadingPage from '../../experience/LoadingPage';
 
 const ProductsPage: FC = () => {
   const { id } = useParams() as { id: string };
@@ -38,11 +39,7 @@ const ProductsPage: FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <FlexBox direction="column" justify="center" align="center" height="120px">
-        <SpinningDots />
-      </FlexBox>
-    );
+    return <LoadingPage />;
   }
 
   const productPreviews = products.documents.map((product) => (

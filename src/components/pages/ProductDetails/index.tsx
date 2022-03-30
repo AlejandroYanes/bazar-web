@@ -101,8 +101,14 @@ const ProductDetailsPage: FC = () => {
 
   if (isLoading) {
     return (
-      <FlexBox direction="column" justify="center" align="center" height="120px">
-        <SpinningDots />
+      <FlexBox
+        direction="column"
+        justify="flex-start"
+        align="stretch"
+        height="100hv"
+        padding="80px 0 0"
+      >
+        <SpinningDots style={{ margin: 'auto' }} />
       </FlexBox>
     );
   }

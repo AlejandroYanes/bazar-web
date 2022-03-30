@@ -1,16 +1,11 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import {
-  ChevronRightIcon,
-  FlexBox,
-  LinkButton,
-  SpinningDots,
-  Title,
-} from 'activate-components';
+import { ChevronRightIcon, FlexBox, LinkButton, Title, } from 'activate-components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import TopBar from 'components/experience/TopBar';
+import LoadingPage from '../../experience/LoadingPage';
 
 const LandingPage: FC = () => {
   const { isLoading, data, error } = useQuery(
@@ -25,11 +20,7 @@ const LandingPage: FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <FlexBox direction="column" justify="center" align="center" height="120px">
-        <SpinningDots />
-      </FlexBox>
-    );
+    return <LoadingPage />;
   }
 
   const categories = data.documents.map((cat) => (
