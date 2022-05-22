@@ -6,8 +6,8 @@ import productsApi from 'api/products';
 import { Container, ImageHolder } from './styled';
 
 const ProductPreview: FC<ProductModel> = (props) => {
-  const { $id, name, price, thumbnail } = props;
-  const imgUrl = useMemo(() => productsApi.fetchThumbnail(thumbnail), []);
+  const { $id, name, price, bucket, thumbnail } = props;
+  const imgUrl = useMemo(() => productsApi.fetchThumbnail(bucket, thumbnail), []);
 
   return (
     <Container to={`/product/${$id}`}>

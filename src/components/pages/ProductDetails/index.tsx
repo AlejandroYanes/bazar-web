@@ -52,17 +52,22 @@ const ProductDetailsPage: FC = () => {
 
   const imgUrl = useMemo<URL | undefined>(() => {
     if (!isLoading && product) {
-      return productsApi.fetchPhoto(product.images[index],window.innerWidth);
+      return productsApi.fetchPhoto(
+        product.bucket,
+        product.images[index],
+        window.innerWidth,
+      );
     }
     return undefined;
   }, [isLoading, index]);
 
   const handleAddToCart = () => {
-    const { name, price, thumbnail } = product;
+    const { name, price, bucket, thumbnail } = product;
     addToCart({
       $id: faker.random.uuid(),
       name,
       price,
+      bucket,
       thumbnail,
       quantity,
     } as CartModel);

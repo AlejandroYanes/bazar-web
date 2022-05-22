@@ -10,8 +10,8 @@ import { formatCurrency } from 'helpers/numbers';
 
 const ProductQuote: FC<CartModel> = (props) => {
   const { updateProduct, removeFromCart } = useCart();
-  const { $id, name, price, thumbnail, quantity } = props;
-  const imgUrl = useMemo(() => productsApi.fetchThumbnail(thumbnail), []);
+  const { $id, name, price, bucket, thumbnail, quantity } = props;
+  const imgUrl = useMemo(() => productsApi.fetchThumbnail(bucket, thumbnail), []);
 
   return (
     <FlexBox direction="column" align="stretch" mB>

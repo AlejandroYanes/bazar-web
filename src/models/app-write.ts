@@ -10,6 +10,11 @@ export interface BaseModel {
   $write: Role[];
 }
 
+export interface TimeTrace {
+  createdAt: string;
+  modifiedAt: string;
+}
+
 export interface ListResponse<T = any> {
   sum?: number;
   total?: number;

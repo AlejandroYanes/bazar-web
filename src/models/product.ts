@@ -7,4 +7,7 @@ export interface ProductModel extends BaseModel {
   images: string[];
   thumbnail: string;
   subCategory: string;
+  team: string;
+  store: string;
+  bucket: string;
 }

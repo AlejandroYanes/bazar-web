@@ -35,8 +35,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   background-color: #fff;
+}
 
-  #root {
-    height: 100%;
-  }
+body #root {
+  height: 100%;
 }
