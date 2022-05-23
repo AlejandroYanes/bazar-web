@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { FlexBox, Text, Title, IconButton } from 'activate-components';
 import { AddCircledOutline, RemoveEmpty, Trash } from 'iconoir-react';
-import { CartModel } from 'models/cart';
+import { CartModel } from 'models/cart-item';
 import productsApi from 'api/products';
 import { useCart } from 'components/providers/Cart';
 import IconoirIcon from 'components/experience/IconoirIcon';

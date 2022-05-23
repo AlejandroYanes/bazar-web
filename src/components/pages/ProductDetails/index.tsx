@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { AppwriteException } from 'appwrite';
-import * as faker from 'faker';
 import {
   AbsoluteContent,
   Button,
@@ -22,7 +21,7 @@ import {
   useSimplePagination,
 } from 'activate-components';
 import { AddCircledOutline, RemoveEmpty, ArrowLeft } from 'iconoir-react';
-import { CartModel } from 'models/cart';
+import { CartItemModel } from 'models/cart-item';
 import { formatCurrency } from 'helpers/numbers';
 import productsApi from 'api/products';
 import { QueryKey } from 'components/providers/Query';
@@ -64,13 +63,12 @@ const ProductDetailsPage: FC = () => {
   const handleAddToCart = () => {
     const { name, price, bucket, thumbnail } = product;
     addToCart({
-      $id: faker.random.uuid(),
       name,
       price,
       bucket,
       thumbnail,
       quantity,
-    } as CartModel);
+    } as CartItemModel);
     setShowModal(false);
     setQuantity(1);
     showNotification({

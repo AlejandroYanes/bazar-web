@@ -3,7 +3,7 @@ export enum Role {
 }
 
 export interface BaseModel {
-  $id: string;
+  $id?: string;
   $collection: string;
   $internalId: string;
   $read: Role[];
