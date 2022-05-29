@@ -30,7 +30,7 @@ const CartProvider: FC = (props) => {
 
     if (!cart) {
       const cartPayload = addTimeStamp({
-        user: (session || patchSession).$id,
+        user: (session || patchSession).userId,
       } as CartModel);
       const newCart = await cartsApi.create(cartPayload);
       setCart(newCart as CartModel);
@@ -46,7 +46,6 @@ const CartProvider: FC = (props) => {
   }, [checkRequirements]);
 
   const updateProduct = useCallback(async (product: CartItemModel) => {
-    await checkRequirements();
     const stampedProduct = addTimeStamp(product);
     setProducts((old) => old.reduce((list, prod) => {
       if (prod.$id === product.$id) return list.concat(stampedProduct);
@@ -56,7 +55,6 @@ const CartProvider: FC = (props) => {
   }, [checkRequirements]);
 
   const removeFromCart = useCallback(async (id: string) => {
-    await checkRequirements();
     setProducts((old) => old.filter((prod) => prod.$id !== id));
     await cartsItemsApi.remove(id);
   }, []);
