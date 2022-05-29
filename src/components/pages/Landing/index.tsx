@@ -5,7 +5,7 @@ import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';
 import TopBar from 'components/experience/TopBar';
-import LoadingPage from '../../experience/LoadingPage';
+import LoadingPage from 'components/experience/LoadingPage';
 
 const LandingPage: FC = () => {
   const { isLoading, data, error } = useQuery(

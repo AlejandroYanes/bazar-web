@@ -3,7 +3,7 @@ import { getAppWrite } from './base';
 
 const { REACT_APP_COLLECTION_CART_ITEMS } = process.env;
 
-const cartsApi = {
+const cartsItemsApi = {
   create: (cart: CartItemModel) => {
     return getAppWrite().database.createDocument(
       REACT_APP_COLLECTION_CART_ITEMS,
@@ -18,6 +18,12 @@ const cartsApi = {
       cart,
     );
   },
+  remove: (cartItemId: string) => {
+    return getAppWrite().database.deleteDocument(
+      REACT_APP_COLLECTION_CART_ITEMS,
+      cartItemId,
+    );
+  }
 };
 
-export default cartsApi;
+export default cartsItemsApi;
