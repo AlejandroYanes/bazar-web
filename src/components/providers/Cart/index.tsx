@@ -1,10 +1,18 @@
-import { createContext, FC, useCallback, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
+import { CartModel } from 'models/cart';
 import { CartItemModel } from 'models/cart-item';
+import cartsApi from 'api/carts';
 import cartsItemsApi from 'api/cart-items';
 import { addTimeStamp } from 'helpers/time-trace';
 import { useAuth } from '../Auth';
-import { CartModel } from '../../../models/cart';
-import cartsApi from '../../../api/carts';
 
 interface CartContext {
   products: CartItemModel[];
@@ -29,20 +37,19 @@ const CartProvider: FC = (props) => {
     }
 
     if (!cart) {
-      const cartPayload = addTimeStamp({
-        user: (session || patchSession).userId,
-      } as CartModel);
-      const newCart = await cartsApi.create(cartPayload);
+      const user = (session || patchSession).userId;
+      const cartPayload = addTimeStamp({ user } as CartModel);
+      const newCart = await cartsApi.create(cartPayload, user);
       setCart(newCart as CartModel);
       return newCart;
     }
   }, [session, cart]);
 
   const addToCart = useCallback(async (product: CartItemModel) => {
-    const patchCart = await checkRequirements();
+    const patchCart = (await checkRequirements() as CartModel);
     const stampedProduct = addTimeStamp({ ...product, cart: (cart || patchCart).$id });
     setProducts((old) => old.concat(stampedProduct));
-    await cartsItemsApi.create(stampedProduct);
+    await cartsItemsApi.create(stampedProduct, (cart || patchCart).user);
   }, [checkRequirements]);
 
   const updateProduct = useCallback(async (product: CartItemModel) => {
@@ -65,6 +72,21 @@ const CartProvider: FC = (props) => {
     updateProduct,
     removeFromCart,
   }), [products]);
+
+  const initCart = async () => {
+    const previousCart = await cartsApi.getByUser(session.userId);
+    if (previousCart) {
+      setCart(previousCart as CartModel);
+      const previousProducts = await cartsItemsApi.listByCart(previousCart.$id);
+      setProducts(previousProducts.documents as CartItemModel[]);
+    }
+  };
+
+  useEffect(() => {
+    if (!!session && !cart) {
+      initCart();
+    }
+  }, [session, cart]);
 
   return (
     <Provider value={contextValue}>

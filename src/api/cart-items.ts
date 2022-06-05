@@ -1,21 +1,30 @@
+import { Query } from 'appwrite';
 import { CartItemModel } from 'models/cart-item';
 import { getAppWrite } from './base';
 
 const { REACT_APP_COLLECTION_CART_ITEMS } = process.env;
 
 const cartsItemsApi = {
-  create: (cart: CartItemModel) => {
+  listByCart: (cart: string) => {
+    return getAppWrite().database.listDocuments(
+      REACT_APP_COLLECTION_CART_ITEMS,
+      [Query.equal('cart', cart)],
+    );
+  },
+  create: (cartItem: CartItemModel, owner: string) => {
     return getAppWrite().database.createDocument(
       REACT_APP_COLLECTION_CART_ITEMS,
       'unique()',
-      cart,
+      cartItem,
+      [`user:${owner}`],
+      [`user:${owner}`],
     );
   },
-  update: (cart: Partial<CartItemModel>) => {
+  update: (cartItem: Partial<CartItemModel>) => {
     return getAppWrite().database.updateDocument(
       REACT_APP_COLLECTION_CART_ITEMS,
-      cart.$id,
-      cart,
+      cartItem.$id,
+      cartItem,
     );
   },
   remove: (cartItemId: string) => {

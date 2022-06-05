@@ -3,6 +3,9 @@ import { SessionModel } from 'models/session';
 import { getAppWrite } from './base';
 
 const authApi = {
+  getCurrentSession: (): Promise<SessionModel> => {
+    return getAppWrite().account.getSession('current');
+  },
   signIn: ({ email, password }: AuthCredentials): Promise<SessionModel> => {
     return getAppWrite().account.createSession(email, password);
   },

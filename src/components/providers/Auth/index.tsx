@@ -1,4 +1,4 @@
-import { createContext, FC, useContext, useMemo, useState } from 'react';
+import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
 import { AuthCredentials } from 'models/account';
 import authApi from 'api/auth';
 import { SessionModel } from '../../../models/session';
@@ -30,6 +30,10 @@ const AuthProvider: FC = (props) => {
     },
     logout: () => authApi.logout(session.$id),
   }), [session]);
+
+  useEffect(() => {
+    authApi.getCurrentSession().then((currentSession) => setSession(currentSession));
+  }, []);
 
   return (
     <Provider value={contextValue}>{children}</Provider>
