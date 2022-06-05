@@ -1,10 +1,14 @@
 import { AuthCredentials } from 'models/account';
 import { SessionModel } from 'models/session';
+import { UserModel } from 'models/user';
 import { getAppWrite } from './base';
 
 const authApi = {
   getCurrentSession: (): Promise<SessionModel> => {
     return getAppWrite().account.getSession('current');
+  },
+  getUserInfo: (): Promise<UserModel> => {
+    return getAppWrite().account.get();
   },
   signIn: ({ email, password }: AuthCredentials): Promise<SessionModel> => {
     return getAppWrite().account.createSession(email, password);

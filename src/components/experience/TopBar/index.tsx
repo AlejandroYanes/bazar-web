@@ -6,11 +6,14 @@ import {
   IconButton,
   RenderIf,
 } from 'activate-components';
-import { SimpleCart, ArrowLeft, Search } from 'iconoir-react';
+import { SimpleCart, ArrowLeft, Search, User } from 'iconoir-react';
+import { useUserInfo } from 'components/providers/Auth';
 import IconoirIcon from '../IconoirIcon';
 
 const TopBar: FC = () => {
   const { push, location: { pathname }, goBack } = useHistory();
+  const { isAnonymous, user } = useUserInfo();
+
   return (
     <FlexBox justify="flex-end" align="center" padding="16px 16px 16px 0" height={80}>
       <RenderIf condition={pathname !== '/'}>
@@ -34,7 +37,9 @@ const TopBar: FC = () => {
         mL
         mR
       />
-      <Avatar src="user1" />
+      <RenderIf condition={user && !isAnonymous} fallback={<IconoirIcon icon={User} />}>
+        <Avatar src="user1" />
+      </RenderIf>
     </FlexBox>
   );
 };

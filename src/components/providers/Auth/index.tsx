@@ -2,9 +2,12 @@ import { createContext, FC, useContext, useEffect, useMemo, useState } from 'rea
 import { AuthCredentials } from 'models/account';
 import authApi from 'api/auth';
 import { SessionModel } from '../../../models/session';
+import { UserModel } from '../../../models/user';
 
 interface AuthContext {
+  isAnonymous: boolean;
   session: SessionModel;
+  user: UserModel;
   createAnonymousSession: () => Promise<SessionModel>;
   createSession: (credentials: AuthCredentials) => void;
   logout: () => void;
@@ -16,9 +19,13 @@ const { Provider } = context;
 const AuthProvider: FC = (props) => {
   const { children } = props;
   const [session, setSession] = useState<SessionModel | undefined>(undefined);
+  const [currentUser, setCurrentUser] = useState<UserModel | undefined>(undefined);
+  const [isAnonymous, setIsAnonymous] = useState(true);
 
   const contextValue = useMemo<AuthContext>(() => ({
+    isAnonymous,
     session,
+    user: currentUser,
     createAnonymousSession: async (): Promise<SessionModel> => {
       const newSession = await authApi.createAnonymousSession();
       setSession(newSession);
@@ -29,10 +36,21 @@ const AuthProvider: FC = (props) => {
       setSession(newSession);
     },
     logout: () => authApi.logout(session.$id),
-  }), [session]);
+  }), [session, currentUser, isAnonymous]);
+
+  const initAuth = async () => {
+    const currentSession = await authApi.getCurrentSession();
+
+    if (currentSession) {
+      setSession(currentSession);
+      const currentUser = await authApi.getUserInfo();
+      setCurrentUser(currentUser);
+      setIsAnonymous(!currentUser.emailVerification);
+    }
+  };
 
   useEffect(() => {
-    authApi.getCurrentSession().then((currentSession) => setSession(currentSession));
+    initAuth();
   }, []);
 
   return (
@@ -42,5 +60,9 @@ const AuthProvider: FC = (props) => {
 
 export const useAuth = () => useContext(context);
 export const useSession = () => useContext(context).session;
+export const useUserInfo = () => {
+  const { user, isAnonymous } = useContext(context);
+  return { user, isAnonymous };
+};
 
 export default AuthProvider;
