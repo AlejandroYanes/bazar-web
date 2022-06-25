@@ -35,7 +35,7 @@ const LandingPage: FC = () => {
   return (
     <>
       <TopBar />
-      <Title level={1} size={32} margin="0" padding="16px">
+      <Title level={1} size={38} margin="0" padding="16px">
         Categorías
       </Title>
       <FlexBox direction="column" align="stretch" padding="0 16px 32px">

@@ -49,7 +49,7 @@ const ProductsPage: FC = () => {
   return (
     <>
       <TopBar />
-      <Title level={1} size={32} padding="16px" ellipsis>{category.name}</Title>
+      <Title level={1} size={38} padding="16px" ellipsis>{category.name}</Title>
       <FlexBox
         direction="column"
         align="stretch"
