@@ -17,7 +17,7 @@ import { Footer } from './styled/page';
 import IconoirIcon from '../../experience/IconoirIcon';
 
 const CartPage: FC = () => {
-  const { goBack } = useHistory();
+  const { goBack, push } = useHistory();
   const { products } = useCart();
   const { count, cost, quotes } = useMemo(() => ({
     cost: products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0),
@@ -57,7 +57,12 @@ const CartPage: FC = () => {
             <Text size="large">Total:</Text>
             <Text size="large" weight="bold">{formatCurrency(cost)}</Text>
           </FlexBox>
-          <Button onClick={() => undefined} label="PAGAR" variant="fill" color="brand" />
+          <Button
+            onClick={() => push('/checkout')}
+            label="COMPRAR"
+            variant="fill"
+            color="brand"
+          />
         </Footer>
       </RenderIf>
     </>

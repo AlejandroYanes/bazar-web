@@ -6,6 +6,7 @@ import SecondLevelPage from 'components/pages/SecondLevel';
 import ProductsPage from 'components/pages/Products';
 import ProductDetailsPage from 'components/pages/ProductDetails';
 import CartPage from 'components/pages/Cart';
+import Checkout from 'components/pages/Checkout';
 
 const Routes: FunctionComponent = () => {
   return (
@@ -17,6 +18,7 @@ const Routes: FunctionComponent = () => {
           <Route path="/category/:id" component={SecondLevelPage} />
           <Route path="/product/:id" component={ProductDetailsPage} />
           <Route path="/cart" component={CartPage} />
+          <Route path="/checkout" component={Checkout} />
         </Switch>
       </Layout>
     </BrowserRouter>
