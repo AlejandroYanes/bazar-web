@@ -15,14 +15,15 @@ import useSignupState, { rules } from './state';
 const SignupPage = () => {
   const { goBack } = useHistory();
   const {
-    state: { errors, credentials },
-    actions: { setCredentials, setErrors },
+    state: { errors, credentials, isLoading },
+    actions: { setCredentials, setErrors, signup },
   } = useSignupState();
 
   return (
     <>
       <FlexBox padding="16px 16px 16px 0" height={80}>
         <IconButton
+          disabled={isLoading}
           icon={<IconoirIcon icon={ArrowLeft} />}
           size="large"
           onClick={goBack}
@@ -41,7 +42,7 @@ const SignupPage = () => {
           errors={errors as any}
           onError={setErrors}
         >
-          <Field name="name" label="Nombre" required />
+          <Field name="firstName" label="Nombre" required />
           <Field name="lastName" label="Apellidos" required />
           <Field name="email" label="Correo" required />
           <Field name="password" label="Contraseña" component={PasswordInput} required />
@@ -53,7 +54,8 @@ const SignupPage = () => {
           />
         </Form>
         <Button
-          onClick={() => undefined}
+          loading={isLoading}
+          onClick={signup}
           label="ENTRAR"
           variant="fill"
           margin="auto 0 0 0"

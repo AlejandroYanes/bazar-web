@@ -1,14 +1,15 @@
-// import { Models } from 'appwrite';
+export interface UserPrefsModel {
+  firstName?: string;
+  lastName?: string;
+}
 
 export interface UserModel {
   $id: string;
   email: string;
   emailVerification: boolean;
   name: string;
-  firstName?: string;
-  lastName?: string;
   passwordUpdate: number;
-  prefs: Record<string, string | number>;
+  prefs: UserPrefsModel;
   registration: number;
   status: boolean;
 }

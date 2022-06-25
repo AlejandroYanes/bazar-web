@@ -19,7 +19,7 @@ const authApi = {
   createAnonymousSession: (): Promise<SessionModel> => {
     return getAppWrite().account.createAnonymousSession();
   },
-  updateCredentials: ({ email, password }: AuthCredentials): Promise<UserModel> => {
+  updateEmail: ({ email, password }: AuthCredentials): Promise<UserModel> => {
     return getAppWrite().account.updateEmail(email, password);
   },
   updateName: (name: string): Promise<UserModel> => {
@@ -29,6 +29,12 @@ const authApi = {
     preferences: { firstName: string; lastName: string },
   ): Promise<UserModel> => {
     return getAppWrite().account.updatePrefs(preferences);
+  },
+  sendVerificationEmail: () => {
+    return getAppWrite().account.createVerification('http://localhost:3000/verify');
+  },
+  confirmVerification: (userId: string, token: string) => {
+    return getAppWrite().account.updateVerification(userId, token);
   },
   logout: (sessionId: string) => {
     return getAppWrite().account.deleteSession(sessionId);

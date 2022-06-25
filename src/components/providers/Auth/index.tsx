@@ -10,6 +10,7 @@ interface AuthContext {
   user: UserModel;
   createAnonymousSession: () => Promise<SessionModel>;
   createSession: (credentials: AuthCredentials) => void;
+  loadUserInfo: () => void;
   logout: () => void;
 }
 
@@ -35,6 +36,10 @@ const AuthProvider: FC = (props) => {
       const newSession = await authApi.signIn(credentials);
       setSession(newSession);
     },
+    loadUserInfo: async () => {
+      const currentUser = await authApi.getUserInfo();
+      setCurrentUser(currentUser);
+    },
     logout: () => authApi.logout(session.$id),
   }), [session, currentUser, isAnonymous]);
 
@@ -45,7 +50,7 @@ const AuthProvider: FC = (props) => {
       setSession(currentSession);
       const currentUser = await authApi.getUserInfo();
       setCurrentUser(currentUser);
-      setIsAnonymous(!currentUser.emailVerification);
+      setIsAnonymous(!currentUser.email);
     }
   };
 

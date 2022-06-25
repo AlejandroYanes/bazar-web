@@ -2,7 +2,7 @@ import { validateEntity } from 'activate-components';
 import { SessionModel } from 'models/session';
 import authApi from 'api/auth';
 import { Actions, Credentials } from '../reducer';
-import { rules } from '../ruels';
+import { rules } from '../rules';
 
 export default function signup(
   dispatch,
@@ -15,20 +15,21 @@ export default function signup(
 
     if (hasErrors) {
       dispatch({ type: Actions.SET_ERRORS, payload: errors });
+      return;
     }
 
     dispatch({ type: Actions.START_LOADING });
+    const { email, password, firstName, lastName } = credentials;
+    const fullName = `${firstName} ${lastName}`;
 
     if (session && isAnonymous) {
-      await authApi.updateCredentials({
-        email: credentials.email,
-        password: credentials.password,
-      });
-      await authApi.updateName(`${credentials.name} ${credentials.lastName}`);
-      await authApi.updatePreferences({
-        firstName: credentials.name,
-        lastName: credentials.lastName,
-      });
+      await authApi.updateEmail({ email, password });
+      await authApi.updateName(fullName);
+    } else {
+      await authApi.signUp({ email, password, name: fullName });
     }
+
+    await authApi.updatePreferences({ firstName, lastName });
+    await authApi.sendVerificationEmail();
   };
 }

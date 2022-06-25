@@ -6,7 +6,7 @@ export enum Actions {
 }
 
 export interface Credentials {
-  name: string;
+  firstName: string;
   lastName: string;
   email: string;
   password: string;

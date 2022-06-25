@@ -4,7 +4,7 @@ import { useAuth } from 'components/providers/Auth';
 import signupReducer, { Actions, Credentials } from './reducer';
 import signup from './actions/signup';
 
-export * from './ruels';
+export * from './rules';
 
 export default function useSignupState() {
   const { isAnonymous, session } = useAuth();

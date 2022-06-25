@@ -39,7 +39,7 @@ const LoginPage = () => {
         />
       </FlexBox>
       <FlexBox direction="column" align="stretch" padding="0 16px 32px" flex="1">
-        <Title level={1} size={38} padding="16px 0 32px">Hola otra vez!</Title>
+        <Title level={1} size={38} padding="16px 0 32px">Hola!</Title>
         <Form
           state={credentials}
           onChange={setCredentials}
