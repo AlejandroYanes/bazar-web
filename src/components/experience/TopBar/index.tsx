@@ -37,8 +37,12 @@ const TopBar: FC = () => {
         mL
         mR
       />
-      <RenderIf condition={user && !isAnonymous} fallback={<IconoirIcon icon={User} />}>
-        <Avatar src="user1" />
+      <RenderIf condition={!user || isAnonymous} fallback={<Avatar src="user1" />}>
+        <IconButton
+          icon={<IconoirIcon icon={User} />}
+          size="large"
+          onClick={() => push('/login')}
+        />
       </RenderIf>
     </FlexBox>
   );

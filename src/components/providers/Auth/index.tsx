@@ -1,8 +1,8 @@
 import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
-import { AuthCredentials } from 'models/account';
 import authApi from 'api/auth';
-import { SessionModel } from '../../../models/session';
-import { UserModel } from '../../../models/user';
+import { AuthCredentials } from 'models/account';
+import { SessionModel } from 'models/session';
+import { UserModel } from 'models/user';
 
 interface AuthContext {
   isAnonymous: boolean;

@@ -19,6 +19,17 @@ const authApi = {
   createAnonymousSession: (): Promise<SessionModel> => {
     return getAppWrite().account.createAnonymousSession();
   },
+  updateCredentials: ({ email, password }: AuthCredentials): Promise<UserModel> => {
+    return getAppWrite().account.updateEmail(email, password);
+  },
+  updateName: (name: string): Promise<UserModel> => {
+    return getAppWrite().account.updateName(name);
+  },
+  updatePreferences: (
+    preferences: { firstName: string; lastName: string },
+  ): Promise<UserModel> => {
+    return getAppWrite().account.updatePrefs(preferences);
+  },
   logout: (sessionId: string) => {
     return getAppWrite().account.deleteSession(sessionId);
   },
