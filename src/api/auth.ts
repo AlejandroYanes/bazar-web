@@ -33,8 +33,8 @@ const authApi = {
   sendVerificationEmail: () => {
     return getAppWrite().account.createVerification('http://localhost:3000/verify');
   },
-  confirmVerification: (userId: string, token: string) => {
-    return getAppWrite().account.updateVerification(userId, token);
+  confirmVerification: (userId: string, secret: string) => {
+    return getAppWrite().account.updateVerification(userId, secret);
   },
   logout: (sessionId: string) => {
     return getAppWrite().account.deleteSession(sessionId);

@@ -1,5 +1,5 @@
 export enum EventChannelList {
-  SESSION_CREATED = 'SESSION_CREATED',
+  USER_INFO_CHANGED = 'USER_INFO_CHANGED',
 }
 
 export type EventChannel = keyof (typeof EventChannelList);

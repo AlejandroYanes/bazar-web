@@ -40,7 +40,7 @@ const AuthProvider: FC = (props) => {
     initAuth();
   }, []);
 
-  useEventCenterUpdate('SESSION_CREATED', initAuth);
+  useEventCenterUpdate('USER_INFO_CHANGED', initAuth);
 
   return (
     <Provider value={state}>{children}</Provider>

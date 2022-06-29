@@ -10,7 +10,7 @@ interface Info {
   address: string;
 }
 
-const Checkout = () => {
+const CheckoutPage = () => {
   const { goBack } = useHistory();
   const [info, setInfo] = useState<Info>({} as any);
 
@@ -50,4 +50,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckoutPage;

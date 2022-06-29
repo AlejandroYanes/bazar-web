@@ -30,7 +30,7 @@ export default function signup(
       } else {
         await authApi.signUp({ email, password, name: fullName });
         await authApi.signIn({ email, password });
-        notifyEventChannel('SESSION_CREATED');
+        notifyEventChannel('USER_INFO_CHANGED');
       }
 
       await authApi.updatePreferences({ firstName, lastName });
