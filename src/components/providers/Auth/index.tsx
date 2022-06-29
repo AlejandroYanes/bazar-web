@@ -1,4 +1,12 @@
-import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import authApi from 'api/auth';
 import { AuthCredentials } from 'models/account';
 import { SessionModel } from 'models/session';
@@ -32,18 +40,20 @@ const AuthProvider: FC = (props) => {
       setSession(newSession);
       return newSession;
     },
-    createSession: async (credentials: AuthCredentials) => {
+    createSession: async (credentials: AuthCredentials): Promise<SessionModel> => {
       const newSession = await authApi.signIn(credentials);
       setSession(newSession);
+      return session;
     },
-    loadUserInfo: async () => {
+    loadUserInfo: async (): Promise<UserModel> => {
       const currentUser = await authApi.getUserInfo();
       setCurrentUser(currentUser);
+      return currentUser;
     },
     logout: () => authApi.logout(session.$id),
   }), [session, currentUser, isAnonymous]);
 
-  const initAuth = async () => {
+  const initAuth = useCallback(async () => {
     const currentSession = await authApi.getCurrentSession();
 
     if (currentSession) {
@@ -52,7 +62,7 @@ const AuthProvider: FC = (props) => {
       setCurrentUser(currentUser);
       setIsAnonymous(!currentUser.email);
     }
-  };
+  }, []);
 
   useEffect(() => {
     initAuth();

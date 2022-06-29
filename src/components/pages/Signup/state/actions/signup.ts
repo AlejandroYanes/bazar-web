@@ -1,4 +1,4 @@
-import { validateEntity } from 'activate-components';
+import { NotificationType, showNotification, validateEntity } from 'activate-components';
 import { SessionModel } from 'models/session';
 import authApi from 'api/auth';
 import { Actions, Credentials } from '../reducer';
@@ -22,14 +22,24 @@ export default function signup(
     const { email, password, firstName, lastName } = credentials;
     const fullName = `${firstName} ${lastName}`;
 
-    if (session && isAnonymous) {
-      await authApi.updateEmail({ email, password });
-      await authApi.updateName(fullName);
-    } else {
-      await authApi.signUp({ email, password, name: fullName });
-    }
+    try {
+      if (session && isAnonymous) {
+        await authApi.updateEmail({ email, password });
+        await authApi.updateName(fullName);
+      } else {
+        await authApi.signUp({ email, password, name: fullName });
+        await authApi.signIn({ email, password });
+      }
 
-    await authApi.updatePreferences({ firstName, lastName });
-    await authApi.sendVerificationEmail();
+      await authApi.updatePreferences({ firstName, lastName });
+      await authApi.sendVerificationEmail();
+    } catch (e) {
+      showNotification({
+        type: NotificationType.WARNING,
+        title: 'Ooh, algo no salió bien',
+        message: 'Huvo un problema procesando el registro'
+      })
+      dispatch({ type: Actions.FINISH_LOADING });
+    }
   };
 }
