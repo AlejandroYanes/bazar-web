@@ -3,6 +3,7 @@ import { SessionModel } from 'models/session';
 import authApi from 'api/auth';
 import { Actions, Credentials } from '../reducer';
 import { rules } from '../rules';
+import { notifyEventChannel } from '../../../../../event-center';
 
 export default function signup(
   dispatch,
@@ -29,6 +30,7 @@ export default function signup(
       } else {
         await authApi.signUp({ email, password, name: fullName });
         await authApi.signIn({ email, password });
+        notifyEventChannel('SESSION_CREATED');
       }
 
       await authApi.updatePreferences({ firstName, lastName });
@@ -39,6 +41,7 @@ export default function signup(
         title: 'Ooh, algo no salió bien',
         message: 'Huvo un problema procesando el registro'
       })
+    } finally {
       dispatch({ type: Actions.FINISH_LOADING });
     }
   };

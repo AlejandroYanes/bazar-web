@@ -1,80 +1,53 @@
-import {
-  createContext,
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react';
 import authApi from 'api/auth';
-import { AuthCredentials } from 'models/account';
 import { SessionModel } from 'models/session';
 import { UserModel } from 'models/user';
+import { useEventCenterUpdate } from '../../../event-center';
 
 interface AuthContext {
   isAnonymous: boolean;
   session: SessionModel;
   user: UserModel;
-  createAnonymousSession: () => Promise<SessionModel>;
-  createSession: (credentials: AuthCredentials) => void;
-  loadUserInfo: () => void;
-  logout: () => void;
 }
+
+const initialState: AuthContext = {
+  session: undefined,
+  user: undefined,
+  isAnonymous: true,
+};
 
 const context = createContext<AuthContext>(undefined);
 const { Provider } = context;
 
 const AuthProvider: FC = (props) => {
   const { children } = props;
-  const [session, setSession] = useState<SessionModel | undefined>(undefined);
-  const [currentUser, setCurrentUser] = useState<UserModel | undefined>(undefined);
-  const [isAnonymous, setIsAnonymous] = useState(true);
-
-  const contextValue = useMemo<AuthContext>(() => ({
-    isAnonymous,
-    session,
-    user: currentUser,
-    createAnonymousSession: async (): Promise<SessionModel> => {
-      const newSession = await authApi.createAnonymousSession();
-      setSession(newSession);
-      return newSession;
-    },
-    createSession: async (credentials: AuthCredentials): Promise<SessionModel> => {
-      const newSession = await authApi.signIn(credentials);
-      setSession(newSession);
-      return session;
-    },
-    loadUserInfo: async (): Promise<UserModel> => {
-      const currentUser = await authApi.getUserInfo();
-      setCurrentUser(currentUser);
-      return currentUser;
-    },
-    logout: () => authApi.logout(session.$id),
-  }), [session, currentUser, isAnonymous]);
+  const [state, setState] = useState<AuthContext>(initialState);
 
   const initAuth = useCallback(async () => {
     const currentSession = await authApi.getCurrentSession();
 
     if (currentSession) {
-      setSession(currentSession);
       const currentUser = await authApi.getUserInfo();
-      setCurrentUser(currentUser);
-      setIsAnonymous(!currentUser.email);
+      setState({
+        session: currentSession,
+        user: currentUser,
+        isAnonymous: !currentUser.emailVerification,
+      })
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     initAuth();
   }, []);
 
+  useEventCenterUpdate('SESSION_CREATED', initAuth);
+
   return (
-    <Provider value={contextValue}>{children}</Provider>
+    <Provider value={state}>{children}</Provider>
   );
 };
 
 export const useAuth = () => useContext(context);
-export const useSession = () => useContext(context).session;
 export const useUserInfo = () => {
   const { user, isAnonymous } = useContext(context);
   return { user, isAnonymous };

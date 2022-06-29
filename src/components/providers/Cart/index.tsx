@@ -13,6 +13,7 @@ import cartsApi from 'api/carts';
 import cartsItemsApi from 'api/cart-items';
 import { addTimeStamp } from 'helpers/time-trace';
 import { useAuth } from '../Auth';
+import authApi from '../../../api/auth';
 
 interface CartContext {
   products: CartItemModel[];
@@ -26,14 +27,14 @@ const { Provider } = context;
 
 const CartProvider: FC = (props) => {
   const { children } = props;
-  const { session, createAnonymousSession } = useAuth();
+  const { session } = useAuth();
   const [cart, setCart] = useState<CartModel | undefined>(undefined);
   const [products, setProducts] = useState<CartItemModel[]>([]);
 
   const checkRequirements = useCallback(async () => {
     let patchSession = undefined;
     if (!session) {
-      patchSession = await createAnonymousSession();
+      patchSession = await authApi.createAnonymousSession();
     }
 
     if (!cart) {
