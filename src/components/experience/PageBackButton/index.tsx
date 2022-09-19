@@ -1,30 +1,10 @@
 import { FC } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { ChevronLeftIcon, Title } from '@devland-ui/components';
-
+import { Button } from './styled';
 interface Props {
   name: string;
 }
-
-const Button = styled.button`
-  border: none;
-  outline: none;
-  background: transparent;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  transition: all 150ms linear;
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
 
 const PageBackButton: FC<Props> = (props) => {
   const { name } = props;

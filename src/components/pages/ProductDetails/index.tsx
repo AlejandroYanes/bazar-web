@@ -1,8 +1,4 @@
-import { FC, useMemo, useState } from 'react';
-import { useParams } from 'react-router';
-import { useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
-import { AppwriteException } from 'appwrite';
+import { FC, useMemo } from 'react';
 import {
   AbsoluteContent,
   Button,
@@ -12,36 +8,35 @@ import {
   IconButton,
   InfoCircleIcon,
   Modal,
-  NotificationType,
   Paragraph,
   RenderIf,
-  showNotification,
-  SpinningDots, Text,
+  SpinningDots,
+  Text,
   Title,
   useSimplePagination,
 } from '@devland-ui/components';
-import { AddCircledOutline, RemoveEmpty, ArrowLeft } from 'iconoir-react';
-import { CartItemModel } from 'models/cart-item';
+import { AddCircledOutline, ArrowLeft, RemoveEmpty } from 'iconoir-react';
 import { formatCurrency } from 'helpers/numbers';
 import productsApi from 'api/products';
-import { QueryKey } from 'components/providers/Query';
-import { useCart } from 'components/providers/Cart';
 import { ErrorScreen, MessageScreen } from 'components/experience/Screens';
 import IconoirIcon from 'components/experience/IconoirIcon';
-import { Counter, ImageHolder, Footer } from './styled';
+import { Counter, Footer, ImageHolder } from './styled';
+import useProductDetailsState from './state';
 
 const ProductDetailsPage: FC = () => {
-  const { addToCart } = useCart();
-
-  const [showModal, setShowModal] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-
-  const { goBack } = useHistory();
-  const { id } = useParams() as { id: string };
-  const { isLoading, data: product, error } = useQuery(
-    [QueryKey.FETCH_PRODUCT, id],
-    () => productsApi.get(id),
-  );
+  const {
+    isLoading,
+    product,
+    error,
+    quantity,
+    showModal,
+    goBack,
+    openModal,
+    closeModal,
+    increaseQuantity,
+    decreaseQuantity,
+    addToCart,
+  } = useProductDetailsState();
 
   const {
     page: index,
@@ -60,26 +55,8 @@ const ProductDetailsPage: FC = () => {
     return undefined;
   }, [isLoading, index]);
 
-  const handleAddToCart = () => {
-    const { name, price, bucket, thumbnail } = product;
-    addToCart({
-      name,
-      price,
-      bucket,
-      thumbnail,
-      quantity,
-    } as CartItemModel);
-    setShowModal(false);
-    setQuantity(1);
-    showNotification({
-      type: NotificationType.SUCCESS,
-      title: name,
-      message: 'agregado al carrito',
-    });
-  };
-
   if (error) {
-    if ((error as AppwriteException).code === 404) {
+    if (error === 404) {
       return (
         <MessageScreen
           margin="48px 0 0 0"
@@ -175,7 +152,7 @@ const ProductDetailsPage: FC = () => {
       </FlexBox>
       <Footer>
         <Button
-          onClick={() => setShowModal(true)}
+          onClick={openModal}
           label="AGREGAR AL CARRITO"
           variant="fill"
           color="brand"
@@ -185,18 +162,18 @@ const ProductDetailsPage: FC = () => {
         title="Agregar al Carrito"
         size="large"
         visible={showModal}
-        onClose={() => setShowModal(false)}
+        onClose={closeModal}
         footer={(
           <>
             <Button
-              onClick={() => setShowModal(false)}
+              onClick={closeModal}
               label="Cancelar"
               variant="outline"
               color="brand"
               mR
             />
             <Button
-              onClick={handleAddToCart}
+              onClick={addToCart}
               label="Agregar"
               variant="fill"
               color="brand"
@@ -210,12 +187,12 @@ const ProductDetailsPage: FC = () => {
           <FlexBox align="center">
             <IconButton
               icon={<IconoirIcon icon={RemoveEmpty} width={32} height={32} />}
-              onClick={() => setQuantity(quantity - 1)}
+              onClick={decreaseQuantity}
             />
             <Text mR mL>{quantity}</Text>
             <IconButton
               icon={<IconoirIcon icon={AddCircledOutline} width={32} height={32} />}
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={increaseQuantity}
             />
           </FlexBox>
         </FlexBox>
