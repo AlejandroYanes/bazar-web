@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FlexBox, Modal } from 'activate-components';
+import { FlexBox, Modal } from '@devland-ui/components';
 import { LoadingScreen } from 'components/experience/Screens';
 
 const LoadingModal: FunctionComponent = () => {

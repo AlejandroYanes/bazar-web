@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ExclamationTriangleIcon, PositionProps } from 'activate-components';
+import { ExclamationTriangleIcon, PositionProps } from '@devland-ui/components';
 import MessageScreen from './Message';
 
 interface Props extends PositionProps {

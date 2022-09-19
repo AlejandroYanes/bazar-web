@@ -8,7 +8,7 @@ import {
   IconButton, LinkButton,
   PasswordInput, Text,
   Title
-} from 'activate-components';
+} from '@devland-ui/components';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import IconoirIcon from 'components/experience/IconoirIcon';

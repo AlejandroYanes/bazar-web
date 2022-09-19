@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { FlexBox, IconButton, Input } from 'activate-components';
+import { FlexBox, IconButton, Input } from '@devland-ui/components';
 
 const SearchBox: FC = () => {
   const [search, setSearch] = useState('');

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Layout, useAppLayout } from 'activate-components';
+import { Layout, useAppLayout } from '@devland-ui/components';
 import { modalsMap } from 'components/modals';
 import EmptyModal from './EmptyModal';
 

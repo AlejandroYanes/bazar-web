@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FlexBox, Modal, Title, ExclamationTriangleIcon } from 'activate-components';
+import { FlexBox, Modal, Title, ExclamationTriangleIcon } from '@devland-ui/components';
 
 const EmptyModal: FunctionComponent = () => {
   const { goBack } = useHistory();

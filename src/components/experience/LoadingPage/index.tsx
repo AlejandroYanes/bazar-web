@@ -1,4 +1,4 @@
-import { FlexBox, SpinningDots } from 'activate-components';
+import { FlexBox, SpinningDots } from '@devland-ui/components';
 import TopBar from 'components/experience/TopBar';
 
 const LoadingPage = () => (

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from 'react-query';
-import { FlexBox, Title } from 'activate-components';
+import { FlexBox, Title } from '@devland-ui/components';
 import productsApi from 'api/products';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';

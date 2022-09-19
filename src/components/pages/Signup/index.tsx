@@ -7,7 +7,7 @@ import {
   IconButton,
   PasswordInput,
   Title,
-} from 'activate-components';
+} from '@devland-ui/components';
 import { useHistory } from 'react-router-dom';
 import IconoirIcon from 'components/experience/IconoirIcon';
 import useSignupState, { rules } from './state';

@@ -19,7 +19,7 @@ import {
   SpinningDots, Text,
   Title,
   useSimplePagination,
-} from 'activate-components';
+} from '@devland-ui/components';
 import { AddCircledOutline, RemoveEmpty, ArrowLeft } from 'iconoir-react';
 import { CartItemModel } from 'models/cart-item';
 import { formatCurrency } from 'helpers/numbers';

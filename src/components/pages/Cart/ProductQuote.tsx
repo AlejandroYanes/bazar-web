@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { FlexBox, Text, Title, IconButton } from 'activate-components';
+import { FlexBox, Text, Title, IconButton } from '@devland-ui/components';
 import { AddCircledOutline, RemoveEmpty, Trash } from 'iconoir-react';
 import { CartItemModel } from 'models/cart-item';
 import productsApi from 'api/products';

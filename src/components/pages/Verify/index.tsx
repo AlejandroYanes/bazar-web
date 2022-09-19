@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
-import { FlexBox, Title } from 'activate-components';
+import { FlexBox, Title } from '@devland-ui/components';
 import styled, { keyframes } from 'styled-components';
 import { notifyEventChannel } from 'event-center';
 import authApi from 'api/auth';

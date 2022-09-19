@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Configuration, NotificationCenter } from 'activate-components';
+import { Configuration, NotificationCenter } from '@devland-ui/components';
 import { SummerVibesTheme, } from 'styles/themes';
 import { PrimaryGlobalStyles } from './GlobalStyles';
 

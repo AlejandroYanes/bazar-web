@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getBgdColor } from 'activate-components';
+import { getBgdColor } from '@devland-ui/components';
 
 export const Footer = styled.footer`
   position: fixed;

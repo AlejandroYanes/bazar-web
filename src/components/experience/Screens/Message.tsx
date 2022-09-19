@@ -4,7 +4,7 @@ import {
   PositionProps,
   Text,
   Title
-} from 'activate-components';
+} from '@devland-ui/components';
 
 interface Props extends PositionProps {
   icon: ReactNode;

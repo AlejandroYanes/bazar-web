@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FlexBox } from 'activate-components';
+import { FlexBox } from '@devland-ui/components';
 
 const Layout:FC = (props) => {
   const { children } = props;

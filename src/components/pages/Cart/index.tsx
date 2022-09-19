@@ -8,7 +8,7 @@ import {
   RenderIf,
   Text,
   Title
-} from 'activate-components';
+} from '@devland-ui/components';
 import { ArrowLeft } from 'iconoir-react';
 import { formatCurrency } from 'helpers/numbers';
 import { useCart } from 'components/providers/Cart';

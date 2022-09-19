@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getBgdColor, getFontColor } from 'activate-components';
+import { getBgdColor, getFontColor } from '@devland-ui/components';
 
 export const ImageHolder = styled.header`
   position: relative;

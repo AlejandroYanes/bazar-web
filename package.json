@@ -48,7 +48,7 @@
     "usePathForSuiteName": "true"
   },
   "dependencies": {
-    "activate-components": "^0.0.17",
+    "@devland-ui/components": "^0.1.2",
     "appwrite": "^7.0.0",
     "axios": "0.21.2",
     "date-fns": "^2.16.1",

@@ -1,9 +1,13 @@
-import { NotificationType, showNotification, validateEntity } from 'activate-components';
+import {
+  NotificationType,
+  showNotification,
+  validateEntity,
+} from '@devland-ui/components';
+import { notifyEventChannel } from 'event-center';
 import { SessionModel } from 'models/session';
 import authApi from 'api/auth';
 import { Actions, Credentials } from '../reducer';
 import { rules } from '../rules';
-import { notifyEventChannel } from '../../../../../event-center';
 
 export default function signup(
   dispatch,

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FlexBox, PositionProps, SpinningDots } from 'activate-components';
+import { FlexBox, PositionProps, SpinningDots } from '@devland-ui/components';
 
 const LoadingScreen: FunctionComponent<PositionProps> = (props) => {
   return (

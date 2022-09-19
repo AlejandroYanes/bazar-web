@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { FlexBox, Text, Title } from 'activate-components';
+import { FlexBox, Text, Title } from '@devland-ui/components';
 import { ProductModel } from 'models/product';
 import { formatCurrency } from 'helpers/numbers';
 import productsApi from 'api/products';

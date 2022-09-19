@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowLeft } from 'iconoir-react';
 import { useHistory } from 'react-router-dom';
-import { Button, Field, FlexBox, Form, IconButton } from 'activate-components';
+import { Button, Field, FlexBox, Form, IconButton } from '@devland-ui/components';
 import IconoirIcon from 'components/experience/IconoirIcon';
 
 interface Info {

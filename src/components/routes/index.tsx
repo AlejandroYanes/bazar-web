@@ -9,7 +9,7 @@ import CartPage from 'components/pages/Cart';
 import CheckoutPage from 'components/pages/Checkout';
 import LoginPage from 'components/pages/Login';
 import SignupPage from 'components/pages/Signup';
-import VerifyPage from '../pages/Verify';
+import VerifyPage from 'components/pages/Verify';
 
 const Routes: FunctionComponent = () => {
   return (

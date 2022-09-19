@@ -1,4 +1,4 @@
-import { commonRules } from 'activate-components';
+import { commonRules } from '@devland-ui/components';
 import { Credentials } from './reducer';
 
 export const rules = {

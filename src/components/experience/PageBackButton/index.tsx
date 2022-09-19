@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { ChevronLeftIcon, Title } from 'activate-components';
+import { ChevronLeftIcon, Title } from '@devland-ui/components';
 
 interface Props {
   name: string;

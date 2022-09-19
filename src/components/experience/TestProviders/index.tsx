@@ -1,4 +1,4 @@
-import { TestWrapper } from 'activate-components';
+import { TestWrapper } from '@devland-ui/components';
 import QueryProvider from 'components/providers/Query';
 
 export default function TestProviders({ component, ...rest }) {

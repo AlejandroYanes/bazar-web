@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { ChevronRightIcon, FlexBox, LinkButton, Title, } from 'activate-components';
+import { ChevronRightIcon, FlexBox, LinkButton, Title, } from '@devland-ui/components';
 import categoriesApi from 'api/categories';
 import { QueryKey } from 'components/providers/Query';
 import { ErrorScreen } from 'components/experience/Screens';

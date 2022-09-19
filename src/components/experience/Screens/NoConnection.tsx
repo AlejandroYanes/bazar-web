@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, PositionProps } from 'activate-components';
+import { Button, PositionProps } from '@devland-ui/components';
 import ErrorScreen from './Error';
 
 interface Props extends PositionProps {

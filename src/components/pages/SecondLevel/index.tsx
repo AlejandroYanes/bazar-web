@@ -6,7 +6,7 @@ import {
   FlexBox,
   LinkButton,
   Title,
-} from 'activate-components';
+} from '@devland-ui/components';
 import categoriesApi from 'api/categories';
 import subCategoriesApi from 'api/sub-categories';
 import { QueryKey } from 'components/providers/Query';

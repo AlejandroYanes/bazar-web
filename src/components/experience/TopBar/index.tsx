@@ -5,7 +5,7 @@ import {
   FlexBox,
   IconButton,
   RenderIf,
-} from 'activate-components';
+} from '@devland-ui/components';
 import { SimpleCart, ArrowLeft, Search, User } from 'iconoir-react';
 import { useUserInfo } from 'components/providers/Auth';
 import IconoirIcon from '../IconoirIcon';

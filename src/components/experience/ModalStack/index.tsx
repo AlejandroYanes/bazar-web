@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ErrorBoundary } from 'activate-components';
+import { ErrorBoundary } from '@devland-ui/components';
 import ModalRenderer from './ModalRenderer';
 import LoadingModal from './LoadingModal';
 import EmptyModal from './EmptyModal';
