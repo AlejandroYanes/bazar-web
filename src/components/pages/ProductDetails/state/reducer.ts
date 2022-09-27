@@ -1,17 +1,15 @@
 import { Reducer } from 'react';
-import { Action, ACTIONS, State } from './types';
+import { Action, State } from './types';
 
-const productDetailsReducer: Reducer<State, Action> = (state, action): State => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case ACTIONS.OPEN_MODAL:
+const productDetailsReducer: Reducer<State, Action> = (state, action) => {
+  switch (action.type) {
+    case 'open_modal':
       return { ...state, showModal: true };
-    case ACTIONS.CLOSE_MODAL:
+    case 'close_modal':
       return { ...state, showModal: false };
-    case ACTIONS.SET_QUANTITY:
-      return { ...state, quantity: payload };
-    case ACTIONS.RESET_STATE:
+    case 'set_quantity':
+      return { ...state, quantity: action.quantity };
+    case 'reset_state':
       return { ...state, showModal: false, quantity: 1 };
   }
 };

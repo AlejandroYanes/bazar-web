@@ -3,14 +3,23 @@ import { FlexBox, Text, Title, IconButton } from '@devland-ui/components';
 import { AddCircledOutline, RemoveEmpty, Trash } from 'iconoir-react';
 import { CartItemModel } from 'models/cart-item';
 import productsApi from 'api/products';
-import { useCart } from 'components/providers/Cart';
+import { formatCurrency } from 'helpers/numbers';
 import IconoirIcon from 'components/experience/IconoirIcon';
 import { ImageHolder } from './styled/product-quote';
-import { formatCurrency } from 'helpers/numbers';
 
-const ProductQuote: FC<CartItemModel> = (props) => {
-  const { updateProduct, removeFromCart } = useCart();
-  const { $id, name, price, bucket, thumbnail, quantity } = props;
+interface Props {
+  item: CartItemModel;
+  updateProduct: (item: CartItemModel) => void;
+  removeFromCart: (itemId: string) => void;
+}
+
+const ProductQuote: FC<Props> = (props) => {
+  const {
+    item,
+    updateProduct,
+    removeFromCart,
+  } = props;
+  const { $id, name, price, bucket, thumbnail, quantity } = item;
   const imgUrl = useMemo(() => productsApi.fetchThumbnail(bucket, thumbnail), []);
 
   return (
@@ -38,12 +47,12 @@ const ProductQuote: FC<CartItemModel> = (props) => {
         />
         <IconButton
           icon={<IconoirIcon icon={RemoveEmpty} width={32} height={32} />}
-          onClick={() => updateProduct({ ...props, quantity: quantity - 1 })}
+          onClick={() => updateProduct({ ...item, quantity: quantity - 1 })}
         />
         <Text mR mL>{quantity}</Text>
         <IconButton
           icon={<IconoirIcon icon={AddCircledOutline} width={32} height={32} />}
-          onClick={() => updateProduct({ ...props, quantity: quantity + 1 })}
+          onClick={() => updateProduct({ ...item, quantity: quantity + 1 })}
         />
       </FlexBox>
     </FlexBox>

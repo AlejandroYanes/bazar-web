@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import ThemeProvider from './Theme';
 import QueryProvider from './Query';
 import AuthProvider from './Auth';
-import CartProvider from './Cart';
 
 const AppProviders: FunctionComponent = (props) => {
   const { children } = props;
@@ -11,9 +10,7 @@ const AppProviders: FunctionComponent = (props) => {
     <ThemeProvider>
       <QueryProvider>
         <AuthProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
+          {children}
         </AuthProvider>
       </QueryProvider>
     </ThemeProvider>

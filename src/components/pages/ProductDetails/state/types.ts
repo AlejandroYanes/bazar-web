@@ -5,16 +5,10 @@ export interface State {
   quantity: number;
 }
 
-export enum ACTIONS {
-  OPEN_MODAL = 'OPEN_MODAL',
-  CLOSE_MODAL = 'CLOSE_MODAL',
-  SET_QUANTITY = 'SET_QUANTITY',
-  RESET_STATE = 'RESET_STATE',
-}
-
-export interface Action {
-  type: ACTIONS;
-  payload?: any;
-}
+export type Action =
+  | { type: 'reset_state' }
+  | { type: 'open_modal' }
+  | { type: 'close_modal' }
+  | { type: 'set_quantity'; quantity: number };
 
 export type CustomDispatch = Dispatch<Action>;

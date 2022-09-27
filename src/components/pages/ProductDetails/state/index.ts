@@ -6,7 +6,6 @@ import { AppwriteException } from 'appwrite';
 import productsApi from 'api/products';
 import { QueryKey } from 'components/providers/Query';
 import productDetailsReducer from './reducer';
-import { ACTIONS } from './types';
 import addToCart from './actions/add-to-cart';
 
 export default function useProductDetailsState() {
@@ -29,15 +28,15 @@ export default function useProductDetailsState() {
     isLoading,
     error: (error as AppwriteException)?.code,
     goBack,
-    openModal: () => dispatch({ type: ACTIONS.OPEN_MODAL }),
-    closeModal: () => dispatch({ type: ACTIONS.CLOSE_MODAL }),
+    openModal: () => dispatch({ type: 'open_modal' }),
+    closeModal: () => dispatch({ type: 'close_modal' }),
     increaseQuantity: () => dispatch({
-      type: ACTIONS.SET_QUANTITY,
-      payload: state.quantity + 1,
+      type: 'set_quantity',
+      quantity: state.quantity + 1,
     }),
     decreaseQuantity: () => dispatch({
-      type: ACTIONS.SET_QUANTITY,
-      payload: state.quantity - 1,
+      type: 'set_quantity',
+      quantity: state.quantity - 1,
     }),
     addToCart: addToCart(dispatch, state, product),
   };

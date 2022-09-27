@@ -3,7 +3,7 @@ import { CartItemModel } from 'models/cart-item';
 import { ProductModel } from 'models/product';
 import cartsItemsApi from 'api/cart-items';
 import { addTimeStamp } from 'helpers/time-trace';
-import { ACTIONS, CustomDispatch, State } from '../types';
+import { CustomDispatch, State } from '../types';
 import { checkRequirements } from './check-requirements';
 
 export default function addToCart(
@@ -25,7 +25,7 @@ export default function addToCart(
       } as CartItemModel;
       const stampedProduct = addTimeStamp({ ...cartItem, cart: cart.$id });
       await cartsItemsApi.create(stampedProduct, cart.user);
-      dispatch({ type: ACTIONS.RESET_STATE });
+      dispatch({ type: 'reset_state' });
       showNotification({
         type: NotificationType.SUCCESS,
         title: name,

@@ -11,19 +11,24 @@ import {
 } from '@devland-ui/components';
 import { ArrowLeft } from 'iconoir-react';
 import { formatCurrency } from 'helpers/numbers';
-import { useCart } from 'components/providers/Cart';
+import IconoirIcon from 'components/experience/IconoirIcon';
 import ProductQuote from './ProductQuote';
 import { Footer } from './styled/page';
-import IconoirIcon from '../../experience/IconoirIcon';
+import useCartState from './state';
 
 const CartPage: FC = () => {
   const { goBack, push } = useHistory();
-  const { products } = useCart();
+  const { products, updateProduct, removeFromCart } = useCartState();
   const { count, cost, quotes } = useMemo(() => ({
     cost: products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0),
     count: products.reduce((acc, prod) => acc + prod.quantity, 0),
     quotes: products.map((prod) => (
-      <ProductQuote key={prod.$id} {...prod} />
+      <ProductQuote
+        key={prod.$id}
+        item={prod}
+        updateProduct={updateProduct}
+        removeFromCart={removeFromCart}
+      />
     ))
   }), [products]);
 
