@@ -1,7 +1,6 @@
-import { Reducer } from 'react';
 import { Action, State } from './types';
 
-const productDetailsReducer: Reducer<State, Action> = (state, action) => {
+const productDetailsReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'open_modal':
       return { ...state, showModal: true };
