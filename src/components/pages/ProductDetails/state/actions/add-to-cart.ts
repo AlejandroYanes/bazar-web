@@ -4,7 +4,7 @@ import { ProductModel } from 'models/product';
 import cartsItemsApi from 'api/cart-items';
 import { addTimeStamp } from 'helpers/time-trace';
 import { CustomDispatch, State } from '../types';
-import { checkRequirements } from './check-requirements';
+import checkRequirements from './check-requirements';
 
 export default function addToCart(
   dispatch: CustomDispatch,

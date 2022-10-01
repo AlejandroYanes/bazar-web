@@ -3,7 +3,7 @@ import authApi from 'api/auth';
 import cartsApi from 'api/carts';
 import { addTimeStamp } from 'helpers/time-trace';
 
-export async function checkRequirements (): Promise<CartModel> {
+export default async function checkRequirements (): Promise<CartModel> {
   let currentSession = await authApi.getCurrentSession();
   if (!currentSession) {
     currentSession = await authApi.createAnonymousSession();
