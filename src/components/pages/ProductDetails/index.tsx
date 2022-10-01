@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {
   Button,
   FlexBox,
@@ -14,11 +13,11 @@ import { AddCircledOutline, RemoveEmpty } from 'iconoir-react';
 import { formatCurrency } from 'helpers/numbers';
 import { ErrorScreen, MessageScreen } from 'components/experience/Screens';
 import IconoirIcon from 'components/experience/IconoirIcon';
+import ImageSlides from './components/ImageSlides';
 import { Footer } from './styled';
 import useProductDetailsState from './state';
-import ImageSlides from './components/ImageSlides';
 
-const ProductDetailsPage: FC = () => {
+const ProductDetailsPage = () => {
   const {
     isLoading,
     product,
