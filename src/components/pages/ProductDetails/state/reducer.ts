@@ -1,6 +1,6 @@
 import { Action, State } from './types';
 
-const productDetailsReducer = (state: State, action: Action): State => {
+export default function productDetailsReducer (state: State, action: Action): State {
   switch (action.type) {
     case 'open_modal':
       return { ...state, showModal: true };
@@ -11,6 +11,4 @@ const productDetailsReducer = (state: State, action: Action): State => {
     case 'reset_state':
       return { ...state, showModal: false, quantity: 1 };
   }
-};
-
-export default productDetailsReducer;
+}
