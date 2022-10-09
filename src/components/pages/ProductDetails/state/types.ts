@@ -5,10 +5,10 @@ export interface State {
   quantity: number;
 }
 
-export type Action =
+export type Update =
   | { type: 'reset_state' }
   | { type: 'open_modal' }
   | { type: 'close_modal' }
   | { type: 'set_quantity'; quantity: number };
 
-export type CustomDispatch = Dispatch<Action>;
+export type CustomDispatch = Dispatch<Update>;
