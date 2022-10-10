@@ -4,7 +4,7 @@ import { ProductModel } from 'models/product';
 import cartsItemsApi from 'api/cart-items';
 import { addTimeStamp } from 'helpers/time-trace';
 import { CustomDispatch, State } from '../types';
-import checkRequirements from './check-requirements';
+import getCurrentCart from './get-current-cart';
 
 export default function addToCart(
   dispatch: CustomDispatch,
@@ -13,7 +13,7 @@ export default function addToCart(
 ) {
   return async () => {
     try {
-      const cart = await checkRequirements();
+      const cart = await getCurrentCart();
       const { quantity } = state;
       const { name, price, bucket, thumbnail } = product;
       const cartItem = {
